@@ -3,8 +3,8 @@
 
 	class TextDocument 
 	{
-		protected $title;
-		protected $textBlocks;
+		public $title;
+		public $textBlocks;
 		
 		public function GetText ($includeContent, $includeNonContent)
 		{

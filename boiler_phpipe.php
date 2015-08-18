@@ -24,13 +24,12 @@
         public static function runWithHTMLStr($rawHTMLPage) 
         { 
         	$parser = new HTMLParser();
-        	$textBlocks = $parser->parse($rawHTMLPage);
+        	$textDocument = $parser->parse($rawHTMLPage);
         	
-        	echo json_encode($textBlocks);
+        	echo json_encode($textDocument);
         	
 	        $result = $rawHTMLPage;
 	        return ""; 
 	    }
-	    
     }
 ?>  

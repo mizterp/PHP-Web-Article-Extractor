@@ -99,11 +99,17 @@
 			$dom->loadHTML($html);
 
 			$xpath = new DOMXPath($dom);
-			$body = $xpath->query('//body')->item(0);
+			
+			$body = $xpath->query('/')->item(0);
+			//$body = $xpath->query('//body')->item(0);
 
 			$this->recurse($body);
 			
-			return $this->textBlocks;
+			$textDocument = new TextDocument();
+			$textDocument->title = $this->title;
+			$textDocument->textBlocks = $this->textBlocks;
+			
+			return $textDocument;
 		}
 
 		function recurse($node)
@@ -138,7 +144,7 @@
 			$this->blockTagLevel++;
 			$this->flush = true;
 			$this->lastEvent = 0;
-			$this->lastStartTag = strtoupper($node->tagName);
+			$this->lastStartTag = trim(strtoupper($node->tagName));
 		}
 		
 		function endElement($node)
@@ -280,9 +286,10 @@
 		
 		function flushBlock()
 		{
+			//echo $this->lastStartTag . '<br/>';
 			if ($this->inBody == 0)
 			{
-				if($this->inBody == 0 && $this->lastStartTag == "TITLE")
+				if($this->lastStartTag == "TITLE")
 				{
 					$this->title = trim($this->token);
 					$this->text = '';
