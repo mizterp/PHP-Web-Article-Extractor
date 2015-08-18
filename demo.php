@@ -1,5 +1,5 @@
 <?php
-	require 'boilerPHPipe.php';
+	require 'boiler_phpipe.php';
 	
-    echo boilerPHPipe::runWithHTML("http://www.cheese.com/");
+    echo BoilerPHPipe::runWithHTML("http://www.bbc.co.uk/news/world-europe-33894757");
 ?>  

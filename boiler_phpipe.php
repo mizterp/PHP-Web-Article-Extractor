@@ -1,5 +1,6 @@
 <?php
-	
+	require 'text_document.php';
+	require 'html_parser.php';
 	/*	
 		BoilerPHPipe
 		PHP Class for extracting the main content of a webpage.
@@ -10,7 +11,7 @@
 		Licence: 
 	*/
 	
-	class boilerPHPipe 
+	class BoilerPHPipe 
 	{
 		// Extracts article ('main') text from a given URL
 		public static function runWithHTML($url) 
@@ -22,8 +23,13 @@
 		// Extracts article ('main') text from given raw HTML page
         public static function runWithHTMLStr($rawHTMLPage) 
         { 
+        	$parser = new HTMLParser();
+        	$textBlocks = $parser->parse($rawHTMLPage);
+        	
+        	echo json_encode($textBlocks);
+        	
 	        $result = $rawHTMLPage;
-	        return $result; 
+	        return ""; 
 	    }
 	    
     }
