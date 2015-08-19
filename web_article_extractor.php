@@ -4,7 +4,7 @@
 	require	'title_filter.php';
 	
 	/*	
-		BoilerPHPipe
+		PHP Web Article Extractor
 		PHP Class for extracting the main content of a webpage.
 		Written as an implementaion of the 'Boilerplate detection using 
 		Shallow Text Features' whitepaper http://www.l3s.de/~kohlschuetter/publications/wsdm187-kohlschuetter.pdf
