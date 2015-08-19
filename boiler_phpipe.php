@@ -1,11 +1,13 @@
 <?php
 	require 'text_document.php';
 	require 'html_parser.php';
+	require	'title_filter.php';
+	
 	/*	
 		BoilerPHPipe
 		PHP Class for extracting the main content of a webpage.
 		Written as an implementaion of the 'Boilerplate detection using 
-		Shallow Text Features' whitepaper http://www.l3s.de/~kohlschuetter/boilerplate/
+		Shallow Text Features' whitepaper http://www.l3s.de/~kohlschuetter/publications/wsdm187-kohlschuetter.pdf
 	
 		Code author: Luke Hines
 		Licence: 
@@ -24,7 +26,12 @@
         public static function runWithHTMLStr($rawHTMLPage) 
         { 
         	$parser = new HTMLParser();
+        	
+        	// Parse HTML into blocks
         	$textDocument = $parser->parse($rawHTMLPage);
+        	
+        	// Filter out clean article title
+			TitleFilter::Filter($textDocument->title);
         	
         	echo json_encode($textDocument);
         	

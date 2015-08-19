@@ -1,9 +1,9 @@
 <?php
 	class TextBlock
 	{
-		public $isContent;
+		public $isContent = false;
 		public $text;
-		public $labels;
+		public $labels = array();
 		public $numWords;
 		public $numWordsInAnchorText;
 		public $numWordsInWrappedLines;
@@ -12,27 +12,19 @@
 		public $linkDensity;
 		public $numFullTextWords;
 		public $tagLevel;
-		public $currentContainedTextElements;
+		public $currentContainedTextElements = array();
+		public $offsetBlocksStart;
+		public $offsetBlocksEnd;
 		
-		public function __construct()
-        {
-       		 $isContent = false;
-       		 $text = "";
-       		 $numFullTextWords = 0;
-       		 $labels = array();
-       		 $currentContainedTextElements = array();
-        }
-		
-		private function calculateDensities()
+		public function calculateDensities()
 		{
-			if (numWordsInWrappedLines == 0)
+			if ($this->numWordsInWrappedLines == 0)
 			{
-				$numWordsInWrappedLines = numWords;
-				$numWrappedLines = 1;
+				$this->numWordsInWrappedLines = $this->numWords;
+				$this->numWrappedLines = 1;
 			}
-			$textDensity = $numWordsInWrappedLines / $numWrappedLines;
-			$linkDensity = $numWords == 0 ? 0 : $numWordsInAnchorText / $numWords;
+			$this->textDensity = $this->numWordsInWrappedLines / $this->numWrappedLines;
+			$this->linkDensity = $this->numWords == 0 ? 0 : $this->numWordsInAnchorText / $this->numWords;
 		}
-		
 	}
 ?>  

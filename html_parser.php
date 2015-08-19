@@ -6,7 +6,6 @@
 		private $flush = false;
 		private $inIgnorableElement = 0;
 		private $sbLastWasWhitespace = false;
-		private $title = '';
 		private $text = '';
 		private $token = '';
 		private $tagLevel = 0;
@@ -16,8 +15,8 @@
 		private $lastStartTag = '';
 		private $lastEndTag = '';
 		private $inBody = 0;
-		private $ANCHOR_TEXT_START = "$\ue00a";
-		private $ANCHOR_TEXT_END = "\ue00a$";
+		private $ANCHOR_TEXT_START = '$\ue00a';
+		private $ANCHOR_TEXT_END = '\ue00a$';
 		private $inAnchorText = false;
 		private $offsetBlocks = 0;
 		private $textBlocks = array();
@@ -43,46 +42,46 @@
 			$tag = strtoupper($tag);
 			
 			// IGNORABLE_ELEMENT
-			if ($tag == "STYLE" ||
-				$tag == "SCRIPT" ||
-				$tag == "OPTION" ||
-				$tag == "OBJECT" ||
-				$tag == "EMBED" ||
-				$tag == "APPLET" ||
-				$tag == "NOSCRIPT" ||
-				$tag == "LINK")
+			if ($tag === 'STYLE' ||
+				$tag === 'SCRIPT' ||
+				$tag === 'OPTION' ||
+				$tag === 'OBJECT' ||
+				$tag === 'EMBED' ||
+				$tag === 'APPLET' ||
+				$tag === 'NOSCRIPT' ||
+				$tag === 'LINK')
 			{
 				return 0;
 			}
 			
 			// ANCHOR_TEXT
-			if ($tag == "A")
+			if ($tag === 'A')
 			{
 				return 1;
 			}
 			
 			// BODY
-			if ($tag == "BODY")
+			if ($tag === 'BODY')
 			{
 				return 2;
 			}
 			
 			// INLINE_NO_WHITESPACE
-			if ($tag == "STRIKE" ||
-				$tag == "U" ||
-				$tag == "B" ||
-				$tag == "I" ||
-				$tag == "EM" ||
-				$tag == "STRONG" ||
-				$tag == "SPAN"||
-				$tag == "SUP" ||
-				$tag == "CODE" ||
-				$tag == "TT" ||
-				$tag == "SUB" ||
-				$tag == "VAR" ||
-				$tag == "ABBR" ||
-				$tag == "ACRONYM" ||
-				$tag == "FONT")
+			if ($tag === 'STRIKE' ||
+				$tag === 'U' ||
+				$tag === 'B' ||
+				$tag === 'I' ||
+				$tag === 'EM' ||
+				$tag === 'STRONG' ||
+				$tag === 'SPAN'||
+				$tag === 'SUP' ||
+				$tag === 'CODE' ||
+				$tag === 'TT' ||
+				$tag === 'SUB' ||
+				$tag === 'VAR' ||
+				$tag === 'ABBR' ||
+				$tag === 'ACRONYM' ||
+				$tag === 'FONT')
 			{
 				return 3;
 			}
@@ -94,19 +93,25 @@
 		function parse($html)
 		{
 			$dom = new DOMDocument();
-			
 			libxml_use_internal_errors(true);
 			$dom->loadHTML($html);
-
 			$xpath = new DOMXPath($dom);
 			
+			/*	1st retrieve page title
+			*	With this technique: only process the entire document here 
+			*	as meta we exclude as 'content' and only require for the title.
+			*/
+
+			// Extract title from DOM
 			$body = $xpath->query('/')->item(0);
-			//$body = $xpath->query('//body')->item(0);
+			$title = $xpath->query('//title')->item(0)->textContent;
+
+			$body = $xpath->query('//body')->item(0);
 
 			$this->recurse($body);
 			
 			$textDocument = new TextDocument();
-			$textDocument->title = $this->title;
+			$textDocument->title = $title;
 			$textDocument->textBlocks = $this->textBlocks;
 			
 			return $textDocument;
@@ -150,12 +155,9 @@
 		function endElement($node)
 		{
 			$ta = $this->getActionForTag($node->tagName);
-			
 			$this->blockTagLevel--;
 			$this->flush = true;
-			
 			$this->flushBlock();
-			
 			$this->lastEvent = 1;
 			$this->lastEndTag = strtoupper($node->tagName);
 			array_pop($this->labelStacks);
@@ -165,16 +167,14 @@
 		{
 			if ($this->isTag($node->nodeValue))
 			{
-				$node->nodeValue = "";
+				$node->nodeValue = '';
 			}
 			
 			$decodedNodeString = html_entity_decode($node->nodeValue);
-			
 			$nodeCharArr = str_split($decodedNodeString);
 			
 			$start = 0;
 			$length = sizeof($nodeCharArr);
-			
 			$this->textElementId++;
 			
 			if ($this->flush) 
@@ -183,7 +183,8 @@
 				$this->flush = false;
 			}
 			
-			if ($this->inIgnorableElement != 0) {
+			if ($this->inIgnorableElement != 0) 
+			{
 				return;
 			}
 			
@@ -191,7 +192,7 @@
 			$startWhiteSpace = false;
 			$endWhiteSpace = false;
 			
-			if ($length == 0)
+			if ($length === 0)
 			{
 				return;
 			}
@@ -263,7 +264,7 @@
 				}
 			}
 			
-			if ($this->blockTagLevel == -1) 
+			if ($this->blockTagLevel === -1) 
 			{
 				$this->blockTagLevel = $this->tagLevel;
 			}
@@ -287,11 +288,10 @@
 		function flushBlock()
 		{
 			//echo $this->lastStartTag . '<br/>';
-			if ($this->inBody == 0)
+			if ($this->inBody === 0)
 			{
-				if($this->lastStartTag == "TITLE")
+				if($this->lastStartTag === 'TITLE')
 				{
-					$this->title = trim($this->token);
 					$this->text = '';
 					$this->token = '';
 					return;
@@ -299,11 +299,11 @@
 			}
 			
 			$length = strlen($this->token);
-			if($length == 0)
+			if($length === 0)
 			{
 				return;
 			}
-			else if ($length == 1)
+			else if ($length === 1)
 			{
 				if($this->sbLastWasWhitespace)
 				{
@@ -313,7 +313,7 @@
 				}
 			}
 			
-			$tokens = explode(" ", $this->token);
+			$tokens = explode(' ', $this->token);
 			$numWords = 0;
 			$numLinkedWords = 0;
 			$numWrappedLines = 0;
@@ -324,13 +324,13 @@
 			
 			foreach ($tokens as $xToken) 
 			{
-				if($xToken == $this->ANCHOR_TEXT_START)
+				if($xToken === $this->ANCHOR_TEXT_START)
 				{
 					$this->inAnchorText = true;
 				}
 				else
 				{
-					if($xToken == $this->ANCHOR_TEXT_END)
+					if($xToken === $this->ANCHOR_TEXT_END)
 					{
 						$this->inAnchorText = false;
 					}
@@ -364,13 +364,10 @@
 				}
 			}
 			
-			
-			
-			if($numTokens == 0)
+			if($numTokens === 0 || $numWords ===0)
 			{
 				return;
 			}
-			
 			
 			$numWordsInWrappedLines = 0;
 			if($numWrappedLines == 0)
@@ -397,9 +394,9 @@
 			$this->text = '';
 			$this->token = '';
 			$tb->tagLevel = $this->blockTagLevel;
+			$tb->calculateDensities();
 			
 			$this->textBlocks[] = $tb;
-			
 			$this->blockTagLevel = -1;
 		}
 		
