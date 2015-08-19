@@ -1,1 +1,1 @@
-# BoilerPHPipe
+# PHP Web Article Extractor
