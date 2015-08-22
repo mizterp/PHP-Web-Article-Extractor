@@ -24,7 +24,7 @@
 	        return self::runWithHTMLStr($html);
 	    }
 		
-		// Extracts article ('main') text from given raw HTML page
+		// Extracts article 'main' text from given raw HTML page
         public static function runWithHTMLStr($rawHTMLPage) 
         { 
         	$parser = new HTMLParser();
@@ -32,8 +32,8 @@
         	// Parse HTML into blocks
         	$textDocument = $parser->parse($rawHTMLPage);
         	
-        	// Filter out clean article title
-			TitleFilter::Filter($textDocument->title);
+        	// Filter out a clean article title
+			TitleFilter::Filter($textDocument);
         	
         	echo json_encode($textDocument);
         	
