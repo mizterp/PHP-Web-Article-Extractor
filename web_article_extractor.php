@@ -14,6 +14,7 @@
 	require 'text_document.php';
 	require 'html_parser.php';
 	require	'title_filter.php';
+	require 'end_block_filter.php';
 	
 	class BoilerPHPipe 
 	{
@@ -34,6 +35,9 @@
         	
         	// Filter out a clean article title
 			TitleFilter::Filter($textDocument);
+        	
+        	// Discover article 'end' points
+        	EndBlockFilter::Filter($textDocument);
         	
         	echo json_encode($textDocument);
         	
