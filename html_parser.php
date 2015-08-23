@@ -160,6 +160,16 @@
 			array_push($this->labelStacks, null);
 			$ta = $this->getActionForTag($node->tagName);
 			
+			if($ta > 0)
+			{
+				$this->flush = false;
+				return;
+			} 
+			else if ($ta == 0)
+			{
+				//ignorable element
+			}
+			
 			$this->blockTagLevel++;
 			$this->flush = true;
 			$this->lastEvent = 0;
@@ -170,9 +180,26 @@
 		{
 			$ta = $this->getActionForTag($node->tagName);
 			
-			if($ta == 1)
+			if($ta > 0)
 			{
-				$this->linkCount++;
+				if($ta == 1)
+				{	
+					$tokens = explode(' ', $node->nodeValue);
+					
+					foreach ($tokens as $xToken) 
+					{
+						if ($this->isWord($xToken))
+						{
+							$this->linkCount++;
+						}
+					}
+				}
+				$this->flush = false;
+				return;
+			} 
+			else if ($ta == 0)
+			{
+				//ignorable element
 			}
 			
 			$this->blockTagLevel--;
@@ -406,7 +433,7 @@
 			
 			if($this->linkCount > 0)
 			{
-				$tb->numWordsInAnchorText = $numWords;
+				$tb->numWordsInAnchorText = $this->linkCount;
 			}
 			else
 			{
