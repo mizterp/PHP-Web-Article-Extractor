@@ -15,6 +15,7 @@
 	require 'html_parser.php';
 	require	'title_filter.php';
 	require 'end_block_filter.php';
+	require 'number_of_words_filter.php';
 	
 	class BoilerPHPipe 
 	{
@@ -38,6 +39,9 @@
         	
         	// Discover article 'end' points
         	EndBlockFilter::Filter($textDocument);
+        	
+        	// Filter out 'content' blocks by number of words
+        	NumberOfWordsFilter::Filter($textDocument);
         	
         	echo json_encode($textDocument);
         	

@@ -66,6 +66,14 @@
 							$textBlock->labels[] = "END BLOCK"; //TODO: Split labels into seperate area
 						}
 					}
+					else if($textBlock->linkDensity === 1)
+					{
+						$blockTextLowerCase = trim(strtolower($textBlock->text));
+						if($blockTextLowerCase === 'comment')
+						{
+							$textBlock->labels[] = "END BLOCK"; //TODO: Split labels into seperate area
+						}
+					}
 				}
 				else // Large text blocks
 				{

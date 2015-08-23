@@ -26,6 +26,7 @@
 		private $labelStacks = array();
 		private $lastStartTag = '';
 		private $lastEndTag = '';
+		private $linkCount = 0;
 		private $inBody = 0;
 		private $ANCHOR_TEXT_START = '$\ue00a';
 		private $ANCHOR_TEXT_END = '\ue00a$';
@@ -158,6 +159,7 @@
 		{			
 			array_push($this->labelStacks, null);
 			$ta = $this->getActionForTag($node->tagName);
+			
 			$this->blockTagLevel++;
 			$this->flush = true;
 			$this->lastEvent = 0;
@@ -167,6 +169,12 @@
 		function endElement($node)
 		{
 			$ta = $this->getActionForTag($node->tagName);
+			
+			if($ta == 1)
+			{
+				$this->linkCount++;
+			}
+			
 			$this->blockTagLevel--;
 			$this->flush = true;
 			$this->flushBlock();
@@ -336,6 +344,8 @@
 			
 			foreach ($tokens as $xToken) 
 			{
+			//echo $xToken;
+			//echo  '<br />';
 				if($xToken === $this->ANCHOR_TEXT_START)
 				{
 					$this->inAnchorText = true;
@@ -393,10 +403,19 @@
 			}
 			
 			$tb = new TextBlock();
+			
+			if($this->linkCount > 0)
+			{
+				$tb->numWordsInAnchorText = $numWords;
+			}
+			else
+			{
+				$tb->numWordsInAnchorText = 0;
+			}
+			
 			$tb->text = $this->text;
 			$tb->currentContainedTextElements = $this->currentContainedTextElements;
 			$tb->numWords = $numWords;
-			$tb->numWordsInAnchorText = $numLinkedWords;
 			$tb->numWordsInWrappedLines = $numWordsInWrappedLines;
 			$tb->numWrappedLines = $numWrappedLines;
 			$tb->offsetBlocksStart = $this->offsetBlocks;
@@ -407,14 +426,12 @@
 			$this->token = '';
 			$tb->tagLevel = $this->blockTagLevel;
 			$tb->calculateDensities();
-			
 			$this->textBlocks[] = $tb;
 			$this->blockTagLevel = -1;
+			$this->linkCount = 0;
 		}
 		
 		// String comparisons
-		
-		//
 		
 		function isWord($text)
 		{
