@@ -167,7 +167,7 @@
 			} 
 			else if ($ta == 0)
 			{
-				//ignorable element
+				// Ignorable element
 			}
 			
 			$this->blockTagLevel++;
@@ -182,6 +182,7 @@
 			
 			if($ta > 0)
 			{
+				// Count the length of the anchor text
 				if($ta == 1)
 				{	
 					$tokens = explode(' ', $node->nodeValue);
@@ -199,7 +200,7 @@
 			} 
 			else if ($ta == 0)
 			{
-				//ignorable element
+				// Ignorable element
 			}
 			
 			$this->blockTagLevel--;
@@ -334,7 +335,6 @@
 		
 		function flushBlock()
 		{
-			//echo $this->lastStartTag . '<br/>';
 			if ($this->inBody === 0)
 			{
 				if($this->lastStartTag === 'TITLE')
@@ -371,8 +371,6 @@
 			
 			foreach ($tokens as $xToken) 
 			{
-			//echo $xToken;
-			//echo  '<br />';
 				if($xToken === $this->ANCHOR_TEXT_START)
 				{
 					$this->inAnchorText = true;

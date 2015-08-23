@@ -22,7 +22,7 @@
 		public $numWrappedLines;
 		public $textDensity;
 		public $linkDensity;
-		public $numFullTextWords;
+		//public $numFullTextWords;
 		public $tagLevel;
 		public $currentContainedTextElements = array();
 		public $offsetBlocksStart;
