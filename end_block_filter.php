@@ -69,7 +69,12 @@
 				}
 				else // Large text blocks
 				{
-				
+					if(EndBlockFilter::StringContains($blockTextLowerCase,'bank systems & technology encourages readers to engage')
+					||	EndBlockFilter::StringContains($blockTextLowerCase,'data supplied by i-net bridge google+ bdfm publishers')
+					||	EndBlockFilter::StringContains($blockTextLowerCase,'join streetinsider.com free'))
+					{
+						$textBlock->labels[] = "END BLOCK"; //TODO: Split labels into seperate area
+					}
 				}
 			}
 		}
