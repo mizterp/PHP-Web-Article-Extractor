@@ -13,6 +13,10 @@
 	
 	class TextBlock
 	{
+		// Constants
+		const TEXT_DENSITY_THRESHOLD = 9; 
+		
+		// TextBlock public variables
 		public $isContent = false;
 		public $text;
 		public $labels = array();
@@ -22,11 +26,13 @@
 		public $numWrappedLines;
 		public $textDensity;
 		public $linkDensity;
-		//public $numFullTextWords;
+		public $numFullTextWords = 0;
 		public $tagLevel;
 		public $currentContainedTextElements = array();
 		public $offsetBlocksStart;
 		public $offsetBlocksEnd;
+		
+
 		
 		public function calculateDensities()
 		{
@@ -37,6 +43,13 @@
 			}
 			$this->textDensity = $this->numWordsInWrappedLines / $this->numWrappedLines;
 			$this->linkDensity = $this->numWords == 0 ? 0 : $this->numWordsInAnchorText / $this->numWords;
+			
+			// Set full text words if this block is past the threshold
+			if($this->textDensity >= self::MIN_TEXT_DENSITY)
+			{
+				$this->numFullTextWords = $this->numWords;
+			}
+			
 		}
 	}
 ?>  
