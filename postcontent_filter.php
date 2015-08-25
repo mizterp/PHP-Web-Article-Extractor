@@ -11,7 +11,7 @@
 		Licence: PHP Web Article Extractor is licensed under a Creative Commons Attribution 4.0 International License.
 	*/
 	
-	class NumberOfWordsFilter
+	class PostcontentFilter
 	{
 	
 		public static function Filter(&$textDocument)
