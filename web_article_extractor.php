@@ -8,7 +8,7 @@
 		and 'boilerpipe' by Dr. Christian Kohlschütter
 	
 		Code author: Luke Hines
-		Licence: PHP Web Article Extractor is licensed under a Creative Commons Attribution 4.0 International License.
+		Licence: PHP Web Article Extractor is licensed under the MIT License.
 	*/
 	
 	require 'text_document.php';
@@ -16,6 +16,7 @@
 	require	'title_filter.php';
 	require 'end_block_filter.php';
 	require 'number_of_words_filter.php';
+	require 'postcontent_filter.php';
 	
 	class BoilerPHPipe 
 	{
@@ -34,14 +35,17 @@
         	// Parse HTML into blocks
         	$textDocument = $parser->parse($rawHTMLPage);
         	
-        	// Filter out a clean article title
+        	// Filter out clean article title
 			TitleFilter::Filter($textDocument);
         	
-        	// Discover article 'end' points
+        	// Discover article 'end' points using syntactic terminators
         	EndBlockFilter::Filter($textDocument);
         	
-        	// Filter out 'content' blocks by number of words
+        	// Filter content using word count and link density using algorithm from Machine learning
         	NumberOfWordsFilter::Filter($textDocument);
+        	
+        	// Filter blocks that come after content
+        	PostcontentFilter::Filter($textDocument);
         	
         	echo json_encode($textDocument);
         	

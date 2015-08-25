@@ -8,7 +8,7 @@
 		and 'boilerpipe' by Dr. Christian Kohlschütter
 	
 		Code author: Luke Hines
-		Licence: PHP Web Article Extractor is licensed under a Creative Commons Attribution 4.0 International License.
+		Licence: PHP Web Article Extractor is licensed under the MIT License.
 	*/
 	
 	require 'web_article_extractor.php';

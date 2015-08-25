@@ -8,7 +8,7 @@
 		and 'boilerpipe' by Dr. Christian Kohlschütter
 	
 		Code author: Luke Hines
-		Licence: PHP Web Article Extractor is licensed under a Creative Commons Attribution 4.0 International License.
+		Licence: PHP Web Article Extractor is licensed under the MIT License.
 	*/
 	
 	class TextBlock
@@ -32,8 +32,6 @@
 		public $offsetBlocksStart;
 		public $offsetBlocksEnd;
 		
-
-		
 		public function calculateDensities()
 		{
 			if ($this->numWordsInWrappedLines == 0)
@@ -45,11 +43,10 @@
 			$this->linkDensity = $this->numWords == 0 ? 0 : $this->numWordsInAnchorText / $this->numWords;
 			
 			// Set full text words if this block is past the threshold
-			if($this->textDensity >= self::MIN_TEXT_DENSITY)
+			if($this->textDensity >= self::TEXT_DENSITY_THRESHOLD)
 			{
 				$this->numFullTextWords = $this->numWords;
 			}
-			
 		}
 	}
 ?>  
