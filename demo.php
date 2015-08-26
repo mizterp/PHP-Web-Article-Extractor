@@ -13,5 +13,5 @@
 	
 	require 'web_article_extractor.php';
 	
-    echo BoilerPHPipe::runWithHTML("http://www.theregister.co.uk/2015/08/22/ashley_madison_green_denial/");
+    echo BoilerPHPipe::runWithHTML("http://www.bbc.co.uk/news/education-34062879");
 ?>  
