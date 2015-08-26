@@ -17,6 +17,7 @@
 	require 'end_block_filter.php';
 	require 'number_of_words_filter.php';
 	require 'postcontent_filter.php';
+	require 'close_block_merger.php';
 	
 	class BoilerPHPipe 
 	{
@@ -46,6 +47,9 @@
         	
         	// Filter blocks that come after content
         	PostcontentFilter::Filter($textDocument);
+        	
+        	//Merge close blocks
+        	CloseBlockMerger::Merge($textDocument, false);
         	
         	echo json_encode($textDocument);
         	
