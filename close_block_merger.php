@@ -75,14 +75,21 @@
 					
 					if($validMerge)
 					{
-						//$previousBlock->mergeBlock($textBlock);
-						unset($textDocument->textBlocks[$count]);
-						
-						//MERGE - Add to $markedForRemoval or unset($textDocument->textBlocks[$count]); 
-						/*
-							prevBlock.MergeNext(block);
-							it.Remove();
-						*/
+						// Perform merger of this block into the previous block
+						$previousBlock->text .= "\n";
+						$previousBlock->text .= $textBlock->text;
+						$previousBlock->numWords += $textBlock->numWords;
+						$previousBlock->numWordsInAnchorText += $textBlock->numWordsInAnchorText;
+						$previousBlock->numWordsInWrappedLines += $textBlock->numWordsInWrappedLines;
+						$previousBlock->numFullTextWords += $textBlock->numFullTextWords;
+						$previousBlock->offsetBlocksStart = min($previousBlock->offsetBlocksStart,$textBlock->offsetBlocksStart);
+						$previousBlock->offsetBlocksEnd = max($previousBlock->offsetBlocksEnd,$textBlock->offsetBlocksEnd);
+						$previousBlock->tagLevel = min($previousBlock->tagLevel,$textBlock->tagLevel);
+						$previousBlock->isContent = ($previousBlock->isContent || $textBlock->isContent);
+						$previousBlock->currentContainedTextElements = array_merge($previousBlock->currentContainedTextElements,$textBlock->currentContainedTextElements);
+						$previousBlock->labels = array_merge($previousBlock->labels,$textBlock->labels);
+						$previousBlock->calculateDensities();
+						unset($textDocument->textBlocks[$count]); // Safe as per PHP 'foreach' specification
 					}
 					else
 					{
