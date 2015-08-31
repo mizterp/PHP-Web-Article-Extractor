@@ -51,14 +51,11 @@
 				$offset = 1;
 			}
 			
-			$count = 0;
-			
-			foreach ($textDocument->textBlocks as $textBlock) 
+			foreach ($textDocument->textBlocks as $key => $textBlock) 
 			{
 				if(!$textBlock->isContent)
 				{
 					$previousBlock = $textBlock;
-					$count++;
 					continue;
 				}
 				
@@ -90,7 +87,7 @@
 						$previousBlock->currentContainedTextElements = array_merge($previousBlock->currentContainedTextElements,$textBlock->currentContainedTextElements);
 						$previousBlock->labels = array_merge($previousBlock->labels,$textBlock->labels);
 						$previousBlock->calculateDensities();
-						unset($textDocument->textBlocks[$count]); // Safe as per PHP 'foreach' specification
+						unset($textDocument->textBlocks[$key]); // Safe as per PHP 'foreach' specification
 					}
 					else
 					{
@@ -101,7 +98,6 @@
 				{
 					$previousBlock = $textBlock;
 				}
-				$count++;
 			}
 		}
 	}
