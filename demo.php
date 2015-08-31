@@ -13,5 +13,5 @@
 	
 	require 'web_article_extractor.php';
 	
-    echo BoilerPHPipe::runWithHTML("http://www.bbc.co.uk/news/education-34062879");
+    echo BoilerPHPipe::runWithHTML("http://www.bbc.co.uk/news/world-34109186");
 ?>  

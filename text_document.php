@@ -15,7 +15,8 @@
 
 	class TextDocument 
 	{
-		public $title;
+		public $title; // The title of the article
+		public $articleText; // The text of the article
 		public $textBlocks;
 		
 		public function GetText ($includeContent, $includeNonContent)
@@ -38,7 +39,7 @@
 					}
 				}
 				$result .= $block->text;
-				$result .= '\n';;
+				$result .= ' ';;
 			}
 			return $result;
 		}

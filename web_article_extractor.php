@@ -18,6 +18,10 @@
 	require 'number_of_words_filter.php';
 	require 'postcontent_filter.php';
 	require 'close_block_merger.php';
+	require 'non_content_filter.php';
+	require 'largest_block_filter.php';
+	require 'between_title_and_content_filter.php';
+	require 'postextraction_filter.php';
 	
 	class BoilerPHPipe 
 	{
@@ -48,11 +52,30 @@
         	// Filter blocks that come after content
         	PostcontentFilter::Filter($textDocument);
         	
-        	//Merge close blocks
+        	// Merge close blocks
         	CloseBlockMerger::Merge($textDocument, false);
         	
-        	echo json_encode($textDocument);
+        	// Remove blocks that are not content
+        	NonContentFilter::Filter($textDocument);
         	
+        	// Mark largest block as 'content'
+        	LargestBlockFilter::Filter($textDocument);
+        	
+			// Mark blocks found between the title and main content as content as well
+        	BetweenTitleAndContentFilter::Filter($textDocument);
+        	
+        	// Post-extraction cleanup removing now irrelevant blocks and sets full title
+        	PostExtractionFilter::Filter($textDocument);
+        	
+        	echo 'Title: <br />';
+        	echo $textDocument->title;
+        	echo '<br /><br />';
+
+			echo 'Article content: <br />';
+        	echo $textDocument->articleText;
+        	echo '<br />';
+        	
+        	//echo json_encode($textDocument);
 	        $result = $rawHTMLPage;
 	        return ""; 
 	    }
