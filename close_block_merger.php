@@ -58,6 +58,7 @@
 				if(!$textBlock->isContent)
 				{
 					$previousBlock = $textBlock;
+					$count++;
 					continue;
 				}
 				
