@@ -19,7 +19,7 @@
 	
 	class NumberOfWordsFilter
 	{
-		public static function Filter(&$textDocument)
+		public static function filter(&$textDocument)
 		{
 			$prevBlock;
 			$nextBlock;
@@ -44,7 +44,7 @@
 					continue;
 				}
 				
-				// Check link densitys
+				// Check link densities
 				if($currentBlock->linkDensity <= 0.333333)
 				{
 					if($prevBlock->linkDensity <= 0.555556)

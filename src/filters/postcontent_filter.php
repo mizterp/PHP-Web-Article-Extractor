@@ -15,7 +15,7 @@
 	{
 		const WORD_COUNT_THRESHOLD = 60; 
 	
-		public static function Filter(&$textDocument)
+		public static function filter(&$textDocument)
 		{
 			$numberOfWords = 0;
 			$foundEndOfText = false;

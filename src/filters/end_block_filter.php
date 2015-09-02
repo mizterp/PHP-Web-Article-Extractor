@@ -14,7 +14,7 @@
 	class EndBlockFilter
 	{
 		
-		public static function Filter(&$textDocument)
+		public static function filter(&$textDocument)
 		{
 			// Loop through article to find blocks that indicate the end of an article
 			foreach ($textDocument->textBlocks as $textBlock) 
@@ -29,25 +29,25 @@
 						$followingStrings[] = ' comments';
 						$followingStrings[] = ' users responded in';
 					
-						if(EndBlockFilter::StringStartsWithNumberFollowedByString($blockTextLowerCase,$followingStrings)
-						||	EndBlockFilter::StringStartsWith($blockTextLowerCase,'comments')
-						||	EndBlockFilter::StringStartsWith($blockTextLowerCase,'¬© reuters')
-						||	EndBlockFilter::StringStartsWith($blockTextLowerCase,'please rate this')
-						||	EndBlockFilter::StringStartsWith($blockTextLowerCase,'post a comment')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'what you think...')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'add your comment')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'the comments below have not been moderated.')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'add comment')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'reader views')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'have your say')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'reader comments')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'report errors or inaccuracies')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'write to') && EndBlockFilter::StringContains($blockTextLowerCase,'@mysmartrend.com')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'share this page')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'copyright') && EndBlockFilter::StringContains($blockTextLowerCase,'all rights reserved')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'please read our commenting policy')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'data supplied by i-net bridge google+ bdfm publishers')
-						||	EndBlockFilter::StringContains($blockTextLowerCase,'join streetinsider.com free')
+						if(EndBlockFilter::stringStartsWithNumberFollowedByString($blockTextLowerCase,$followingStrings)
+						||	EndBlockFilter::stringStartsWith($blockTextLowerCase,'comments')
+						||	EndBlockFilter::stringStartsWith($blockTextLowerCase,'¬© reuters')
+						||	EndBlockFilter::stringStartsWith($blockTextLowerCase,'please rate this')
+						||	EndBlockFilter::stringStartsWith($blockTextLowerCase,'post a comment')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'what you think...')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'add your comment')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'the comments below have not been moderated.')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'add comment')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'reader views')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'have your say')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'reader comments')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'report errors or inaccuracies')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'write to') && EndBlockFilter::StringContains($blockTextLowerCase,'@mysmartrend.com')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'share this page')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'copyright') && EndBlockFilter::StringContains($blockTextLowerCase,'all rights reserved')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'please read our commenting policy')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'data supplied by i-net bridge google+ bdfm publishers')
+						||	EndBlockFilter::stringContains($blockTextLowerCase,'join streetinsider.com free')
 						|| $blockTextLowerCase === 'back to top'
 						|| $blockTextLowerCase === 'thanks for your comments - this feedback is now closed'
 						|| $blockTextLowerCase === 'also related to this story'
@@ -88,13 +88,13 @@
 		}
 		
 		//Checks if text matches a specific format i.e '23 comments'
-		private static function StringStartsWithNumberFollowedByString($inString,$followingTextArray)
+		private static function stringStartsWithNumberFollowedByString($inString,$followingTextArray)
 		{
 			$count = 0;
 			
 			foreach (str_split($inString) as $character) 
 			{
-				if(EndBlockFilter::CharacterIsDigit($character))
+				if(EndBlockFilter::characterIsDigit($character))
 				{
 					$count++;
 				}
@@ -119,12 +119,12 @@
 			return false;
 		}
 		
-		private static function CharacterIsDigit($char)
+		private static function characterIsDigit($char)
 		{
 			return $char >= 0 && $char <= 9; 
 		}
 		
-		private static function StringStartsWith($haystack,$needle)
+		private static function stringStartsWith($haystack,$needle)
 		{
 			if (0 === strpos($haystack, $needle)) 
 			{
@@ -133,7 +133,7 @@
 			return false;
 		}
 		
-		private static function StringContains($haystack,$needle)
+		private static function stringContains($haystack,$needle)
 		{
 			if (strpos($haystack, $needle) !== FALSE)
 			{

@@ -18,7 +18,7 @@
 	
 	class PostExtractionFilter
 	{
-		public static function Filter(&$textDocument)
+		public static function filter(&$textDocument)
 		{
 			$pastTitle = false;
 			$textDocument->articleText = '';

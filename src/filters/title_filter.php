@@ -15,7 +15,7 @@
 	{
 		private $possibleTitles = array();
 		
-		public static function Filter(&$textDocument)
+		public static function filter(&$textDocument)
 		{
 			//Heuristics title filter
 			$title = trim($textDocument->title);
@@ -37,46 +37,79 @@
 			$result = TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|-][ ]*/');
 			if(strlen($result))
 			{
-				$possibleTitles[] = $result;
+				if (!in_array($result, $possibleTitles))
+				{
+					$possibleTitles[] = $result;
+				}
 			}
 			
 			$result = TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|:][ ]*/');
 			if(strlen($result))
 			{
-				$possibleTitles[] = $result;
+				if (!in_array($result, $possibleTitles))
+				{
+					$possibleTitles[] = $result;
+				}
 			}
 			
 			$result = TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|•][ ]*/');
 			if(strlen($result))
 			{
-				$possibleTitles[] = $result;
+				if (!in_array($result, $possibleTitles))
+				{
+					$possibleTitles[] = $result;
+				}
 			}
 			
 			$result = TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|:\\(\\)][ ]*/');
 			if(strlen($result))
 			{
-				$possibleTitles[] = $result;
+				if (!in_array($result, $possibleTitles))
+				{
+					$possibleTitles[] = $result;
+				}
 			}
 			
 			$result = TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|:\\(\\)\\-][ ]*/');
 			if(strlen($result))
 			{
-				$possibleTitles[] = $result;
+				if (!in_array($result, $possibleTitles))
+				{
+					$possibleTitles[] = $result;
+				}
 			}
 			
-			$result = TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|,|:\\(\\)\\-][ ]*/');
+			// Article has more than one hyphen delimiter
+			$multipleDelimiters = false;
+			if(mb_substr_count($title, '-') > 1)
+			{
+				$title =  preg_replace('/-/', '&#45;', $title, 1);
+				$multipleDelimiters = true;
+			}
+			
+			$result = urldecode(TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|,|:\\(\\)\\-][ ]*/'));
 			if(strlen($result))
 			{
-				$possibleTitles[] = $result;
+				if (!in_array($result, $possibleTitles))
+				{
+					if($multipleDelimiters)
+					{
+						$possibleTitles[] = str_replace('&#45;','-',$result);
+					}
+					else
+					{
+						$possibleTitles[] = $result;
+					}
+				}
 			}
-			
+	
 			// Uncomment for debug
-			// echo json_encode($possibleTitles);
+			//echo json_encode(array_map('strtolower', $possibleTitles));
 			
 			// Loop through article to find matching title
 			foreach ($textDocument->textBlocks as $textBlock) 
 			{
-				if(array_search(strtolower($textBlock->text), array_map('strtolower', $possibleTitles)))
+				if(in_array(strtolower($textBlock->text), array_map('strtolower', $possibleTitles)))
 				{
 					$textBlock->labels[] = "TITLE"; // TODO: Seperate label enumeration
 					$textDocument->title = $textBlock->text;

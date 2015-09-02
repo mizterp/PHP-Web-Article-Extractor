@@ -15,7 +15,7 @@
 	{
 		const BLOCK_DISTANCE = 1;
 		
-		public static function Merge(&$textDocument, $onlyContent)
+		public static function merge(&$textDocument, $onlyContent)
 		{
 			if(sizeof($textDocument->textBlocks) < 2)
 			{
@@ -74,7 +74,7 @@
 					if($validMerge)
 					{
 						// Perform merger of this block into the previous block
-						$previousBlock->text .= "\n";
+						$previousBlock->text .= "\r\n";
 						$previousBlock->text .= $textBlock->text;
 						$previousBlock->numWords += $textBlock->numWords;
 						$previousBlock->numWordsInAnchorText += $textBlock->numWordsInAnchorText;

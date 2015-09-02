@@ -482,7 +482,6 @@
 			}
 		}
 		
-		
 		function isWhiteSpace($character)
 		{
 			if ($character == '\u00A0')
@@ -497,6 +496,5 @@
 			
 			return false;
 		}
-		
 	}
 ?>  

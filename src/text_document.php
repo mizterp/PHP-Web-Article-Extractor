@@ -18,31 +18,5 @@
 		public $title; // The title of the article
 		public $articleText; // The text of the article
 		public $textBlocks;
-		
-		public function GetText ($includeContent, $includeNonContent)
-		{
-			$result = "";
-			foreach ($textBlocks as $block) 
-			{
-				if ($block->isContent) 
-				{
-					if (!$includeContent)
-					{
-						continue;
-					}
-				}
-				else 
-				{
-					if (!$includeNonContent)
-					{
-						continue;
-					}
-				}
-				$result .= $block->text;
-				$result .= ' ';;
-			}
-			return $result;
-		}
-	    
     }
 ?>  

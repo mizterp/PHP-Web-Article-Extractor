@@ -20,7 +20,7 @@
 	
 	class LargestBlockFilter
 	{
-		public static function Filter(&$textDocument)
+		public static function filter(&$textDocument)
 		{
 			if(count($textDocument->textBlocks) < 2)
 			{

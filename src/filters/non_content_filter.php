@@ -12,32 +12,18 @@
 	*/
 	
 	/*
-	* Marks blocks between the 'title' and 'largest block' as content. Will not mark title itself as content
+	*	Removes blocks where 'isContent' is false
 	*/
 	
-	class BetweenTitleAndContentFilter
+	class NonContentFilter
 	{
-		public static function Filter(&$textDocument)
+		public static function filter(&$textDocument)
 		{
-			$pastTitle = false;
 			foreach ($textDocument->textBlocks as $key => $textBlock) 
 			{
-				if(in_array("TITLE",$textBlock->labels))
+				if(!$textBlock->isContent)
 				{
-					// Start when hitting title
-					$pastTitle = true;
-					continue;
-				}
-				
-				if($pastTitle)
-				{
-					$textBlock->isContent = true;
-				}
-				
-				if($textBlock->isContent)
-				{
-					// End once hit content
-					return;
+					unset($textDocument->textBlocks[$key]);	
 				}
 			}
 		}
