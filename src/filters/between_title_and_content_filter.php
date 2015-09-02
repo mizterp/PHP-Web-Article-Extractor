@@ -12,8 +12,8 @@
 	*/
 	
 	/*
-	* Marks blocks between the 'title' and 'largest block' as content. Will not mark title itself as content
-	*/
+	 * Marks blocks between the 'title' and 'largest block' as content. Will not mark title itself as content
+	 */
 	
 	class BetweenTitleAndContentFilter
 	{

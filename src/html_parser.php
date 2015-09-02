@@ -110,23 +110,22 @@
 			$dom->loadHTML($html);
 			$xpath = new DOMXPath($dom);
 			
-			/*	1st retrieve page title
-			*	With this technique: only process the entire document here 
-			*	as meta we exclude as 'content' and only require for the title.
-			*/
+		    /*	
+			 *  1st retrieve page title
+			 *  With this technique: only process the entire document here 
+			 *  as meta is excluded as 'content' and only required for initial title.
+			 */
 
 			// Extract title from DOM
 			$body = $xpath->query('/')->item(0);
 			$title = $xpath->query('//title')->item(0)->textContent;
-
 			$body = $xpath->query('//body')->item(0);
-
+			
 			$this->recurse($body);
 			
 			$textDocument = new TextDocument();
 			$textDocument->title = $title;
 			$textDocument->textBlocks = $this->textBlocks;
-			
 			return $textDocument;
 		}
 

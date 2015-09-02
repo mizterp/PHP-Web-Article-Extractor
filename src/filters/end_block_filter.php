@@ -16,7 +16,11 @@
 		
 		public static function filter(&$textDocument)
 		{
-			// Loads qualifier resources
+			/*
+			 * Loads qualifier resources into memory on a per-extraction basis)
+			 * this means the list can possibly be updated while in production without a 
+			 * redeploy of the source
+			 */
 			$EndBlockStartsWithResource = new ResourceProvider("end_block_lists/starts_with.list");
 			$EndBlockContainsResource = new ResourceProvider("end_block_lists/contains.list");
 			$EndBlockMatchesResource = new ResourceProvider("end_block_lists/matches.list");
