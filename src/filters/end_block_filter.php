@@ -16,6 +16,14 @@
 		
 		public static function filter(&$textDocument)
 		{
+			// Loads qualifier resources
+			$EndBlockStartsWithResource = new ResourceProvider("end_block_lists/starts_with.list");
+			$EndBlockContainsResource = new ResourceProvider("end_block_lists/contains.list");
+			$EndBlockMatchesResource = new ResourceProvider("end_block_lists/matches.list");
+			$EndBlockSingleLinkResource = new ResourceProvider("end_block_lists/single_link.list");
+			$EndBlockMatchesLargeBlockResource = new ResourceProvider("end_block_lists/large_blocks.list");
+			$EndBlockFollowsNumberResource = new ResourceProvider("end_block_lists/follows_number.list");
+		
 			// Loop through article to find blocks that indicate the end of an article
 			foreach ($textDocument->textBlocks as $textBlock) 
 			{
@@ -25,43 +33,10 @@
 					$blockTextLowerCase = trim(strtolower($textBlock->text));
 					if(strlen($blockTextLowerCase) >= 8)
 					{
-						$followingStrings = array();
-						$followingStrings[] = ' comments';
-						$followingStrings[] = ' users responded in';
-					
-						if(EndBlockFilter::stringStartsWithNumberFollowedByString($blockTextLowerCase,$followingStrings)
-						||	EndBlockFilter::stringStartsWith($blockTextLowerCase,'comments')
-						||	EndBlockFilter::stringStartsWith($blockTextLowerCase,'¬© reuters')
-						||	EndBlockFilter::stringStartsWith($blockTextLowerCase,'please rate this')
-						||	EndBlockFilter::stringStartsWith($blockTextLowerCase,'post a comment')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'what you think...')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'add your comment')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'the comments below have not been moderated.')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'add comment')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'reader views')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'have your say')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'reader comments')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'report errors or inaccuracies')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'write to') && EndBlockFilter::StringContains($blockTextLowerCase,'@mysmartrend.com')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'share this page')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'copyright') && EndBlockFilter::StringContains($blockTextLowerCase,'all rights reserved')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'please read our commenting policy')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'data supplied by i-net bridge google+ bdfm publishers')
-						||	EndBlockFilter::stringContains($blockTextLowerCase,'join streetinsider.com free')
-						|| $blockTextLowerCase === 'back to top'
-						|| $blockTextLowerCase === 'thanks for your comments - this feedback is now closed'
-						|| $blockTextLowerCase === 'also related to this story'
-						|| $blockTextLowerCase === 'more on this story'
-						|| $blockTextLowerCase === 'reprints'
-						|| $blockTextLowerCase === 'remind me when i share'
-						|| $blockTextLowerCase === 'sign up for the guardian today'
-						|| $blockTextLowerCase === 'related stories on msn'
-						|| $blockTextLowerCase === 'overview'
-						|| $blockTextLowerCase === 'help employers find you! check out all the jobs and post your resume .'
-						|| $blockTextLowerCase === 'about amazon web services'
-						|| $blockTextLowerCase === 'to join the exclusive \"the bankers club\" ... click here'
-						|| $blockTextLowerCase === '____________________________________________________________________________'
-						|| $blockTextLowerCase === 'my watchlist')
+						if(EndBlockFilter::stringStartsWithNumberFollowedByResource($blockTextLowerCase,$EndBlockFollowsNumberResource)
+						|| EndBlockFilter::stringStartsWithResourceEntry($blockTextLowerCase, $EndBlockStartsWithResource)
+						|| EndBlockFilter::stringContainsResourceEntry($blockTextLowerCase, $EndBlockContainsResource)
+						|| EndBlockFilter::stringMatchesResourceEntry($blockTextLowerCase, $EndBlockMatchesResource))
 						{
 							$textBlock->labels[] = "END BLOCK"; //TODO: Split labels into seperate area
 						}
@@ -69,7 +44,7 @@
 					else if($textBlock->linkDensity === 1)
 					{
 						$blockTextLowerCase = trim(strtolower($textBlock->text));
-						if($blockTextLowerCase === 'comment')
+						if(EndBlockFilter::stringMatchesResourceEntry($blockTextLowerCase, $EndBlockSingleLinkResource))
 						{
 							$textBlock->labels[] = "END BLOCK"; //TODO: Split labels into seperate area
 						}
@@ -77,9 +52,7 @@
 				}
 				else // Large text blocks
 				{
-					if(EndBlockFilter::StringContains($blockTextLowerCase,'bank systems & technology encourages readers to engage')
-					||	EndBlockFilter::StringContains($blockTextLowerCase,'data supplied by i-net bridge google+ bdfm publishers')
-					||	EndBlockFilter::StringContains($blockTextLowerCase,'join streetinsider.com free'))
+					if(EndBlockFilter::stringContainsResourceEntry($blockTextLowerCase, $EndBlockMatchesLargeBlockResource))
 					{
 						$textBlock->labels[] = "END BLOCK"; //TODO: Split labels into seperate area
 					}
@@ -87,9 +60,75 @@
 			}
 		}
 		
-		//Checks if text matches a specific format i.e '23 comments'
-		private static function stringStartsWithNumberFollowedByString($inString,$followingTextArray)
+		private static function characterIsDigit($char)
 		{
+			return $char >= 0 && $char <= 9; 
+		}
+		
+		private static function stringStartsWith($haystack,$needle)
+		{
+			if (0 === strpos($haystack, $needle)) 
+			{
+   				return true;
+			}
+			return false;
+		}
+		
+		private static function stringContains($haystack,$needle)
+		{
+			if (strpos($haystack, $needle) !== FALSE)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		
+		// Checks all resources entries against block text for a 'starts with' qualifier
+		private static function stringStartsWithResourceEntry($blockText,$resource)
+		{
+			foreach ($resource->resourceContent as $resourceEntry) 
+			{
+				if(EndBlockFilter::stringStartsWith($blockText,$resourceEntry))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		// Checks all resource entries against block text for a 'contains' qualifier
+		private static function stringContainsResourceEntry($blockText,$resource)
+		{
+			foreach ($resource->resourceContent as $resourceEntry) 
+			{
+				if(EndBlockFilter::stringContains($blockText,$resourceEntry))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		// Checks all resource entries against block text for a complete match
+		private static function stringMatchesResourceEntry($blockText,$resource)
+		{
+			foreach ($resource->resourceContent as $resourceEntry) 
+			{
+				if($blockText === $resourceEntry)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		//Checks if text matches a specific format i.e '23 comments'
+		private static function stringStartsWithNumberFollowedByResource($inString,$resource)
+		{
+			$followingTextArray = $resource->resourceContent;
 			$count = 0;
 			
 			foreach (str_split($inString) as $character) 
@@ -117,32 +156,6 @@
 			}
 			
 			return false;
-		}
-		
-		private static function characterIsDigit($char)
-		{
-			return $char >= 0 && $char <= 9; 
-		}
-		
-		private static function stringStartsWith($haystack,$needle)
-		{
-			if (0 === strpos($haystack, $needle)) 
-			{
-   				return true;
-			}
-			return false;
-		}
-		
-		private static function stringContains($haystack,$needle)
-		{
-			if (strpos($haystack, $needle) !== FALSE)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
 		}
 		
 	}

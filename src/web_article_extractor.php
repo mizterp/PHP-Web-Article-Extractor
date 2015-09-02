@@ -13,6 +13,7 @@
 	
 	require 'text_document.php';
 	require 'html_parser.php';
+	require 'resource_provider.php';
 	include 'mergers/close_block_merger.php';
 	include	'filters/title_filter.php';
 	include 'filters/end_block_filter.php';

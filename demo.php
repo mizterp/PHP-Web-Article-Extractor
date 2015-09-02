@@ -28,9 +28,6 @@
 		echo sprintf ('<b>Extracted Title:</b><br />%s<br /><br /><b>Extracted Article content:</b><br />%s<br />',
 		$extractionResult->title,$articleTextForDisplay);
 		
-		$csv = array_map('str_getcsv', file('data.csv'));
-		echo json_encode($csv);
-		
 		//Uncomment this line for raw result
 		//echo json_encode($extractionResult);
 	}
