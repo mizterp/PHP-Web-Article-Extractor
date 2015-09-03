@@ -62,6 +62,20 @@ $ php composer.phar install
 
 * PHP >= 5.6.10
 
+## Running the Tests
+
+To run the unit tests, you'll need a set of dev dependencies you can install using Composer:
+
+```
+php composer.phar install --dev
+```
+
+Once installed, just launch the following command:
+
+```
+phpunit
+```
+
 ## Acknowledgements
 
 PHP Web Article Extractor is based on algorithms from the whitepaper ['Boilerplate detection using Shallow Text Features'](http://www.l3s.de/~kohlschuetter/publications/wsdm187-kohlschuetter.pdf) 
