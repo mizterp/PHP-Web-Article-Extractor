@@ -31,9 +31,10 @@
 			foreach ($textDocument->textBlocks as $textBlock) 
 			{
 				$blockNumberOfWords = $textBlock->numWords;
+				$blockTextLowerCase = trim(strtolower($textBlock->text));
+				
 				if($blockNumberOfWords < 15) // Small text blocks
 				{
-					$blockTextLowerCase = trim(strtolower($textBlock->text));
 					if(strlen($blockTextLowerCase) >= 8)
 					{
 						if(EndBlockFilter::stringStartsWithNumberFollowedByResource($blockTextLowerCase,$EndBlockFollowsNumberResource)
