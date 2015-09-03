@@ -10,7 +10,7 @@
 		Licence: PHP Web Article Extractor is made available under the MIT License.
 	*/
 	
-	require 'src/web_article_extractor.php';
+	require_once 'src/web_article_extractor.php';
 	
 	if(isset($_GET['article']))
 	{
