@@ -20,12 +20,12 @@
 			 * this means the list can possibly be updated while in production without a 
 			 * redeploy of the source
 			 */
-			$EndBlockStartsWithResource = new ResourceProvider("end_block_lists/starts_with.list");
-			$EndBlockContainsResource = new ResourceProvider("end_block_lists/contains.list");
-			$EndBlockMatchesResource = new ResourceProvider("end_block_lists/matches.list");
-			$EndBlockSingleLinkResource = new ResourceProvider("end_block_lists/single_link.list");
-			$EndBlockMatchesLargeBlockResource = new ResourceProvider("end_block_lists/large_blocks.list");
-			$EndBlockFollowsNumberResource = new ResourceProvider("end_block_lists/follows_number.list");
+			$EndBlockStartsWithResource = new ResourceProvider("end_block_lists/starts_with.lst");
+			$EndBlockContainsResource = new ResourceProvider("end_block_lists/contains.lst");
+			$EndBlockMatchesResource = new ResourceProvider("end_block_lists/matches.lst");
+			$EndBlockSingleLinkResource = new ResourceProvider("end_block_lists/single_link.lst");
+			$EndBlockMatchesLargeBlockResource = new ResourceProvider("end_block_lists/large_blocks.lst");
+			$EndBlockFollowsNumberResource = new ResourceProvider("end_block_lists/follows_number.lst");
 		
 			// Loop through article to find blocks that indicate the end of an article
 			foreach ($textDocument->textBlocks as $textBlock) 

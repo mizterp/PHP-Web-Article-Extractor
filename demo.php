@@ -34,5 +34,5 @@
 	{
 		echo "Specify article parameter Example: http://localhost:8888/PHP-Web-Article-Extractor/demo.php?article=http://techcrunch.com/2015/09/02/more-shots-of-frankenblackberry/";
 	}
-?> 
+?>
     
