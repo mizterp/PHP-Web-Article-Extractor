@@ -5,7 +5,7 @@ Web Article Extractor is a PHP library that detects and extracts the primary 'ar
 ## Features
 
 * Extract an article and headline from a page in milliseconds
-* Designed to integrate into pipeline or microservice architectured projects
+* Designed to easily integrate into pipeline or microservice architectured projects
 
 ## Usage
 There are two ways to use Web Article Extractor, the first way is to use the provided docker file (See 'Installation'), this will create you an instance that you can start using straight away and is ideal for pipeline architectures, the second way is to integrate the PHP library directly into your project.
