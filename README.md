@@ -8,7 +8,10 @@ Web Article Extractor is a PHP library that detects and extracts the primary 'ar
 * Designed to integrate into pipeline or microservice architectured projects
 
 ## Usage
+#### Docker
+TODO:
 
+#### Composer
 Simple example:
 
 ```php
