@@ -17,7 +17,14 @@
 	{
 		public static function filter(&$textDocument)
 		{
+			$StopWordLanguageMap = new ResourceProvider("stop_words");
 			
+			foreach ($StopWordLanguageMap->resourceContent as $value) 
+			{
+				//echo json_encode($value);
+				
+				//Generate regex on a per language basis
+			}
 		}
 	}
 ?>  

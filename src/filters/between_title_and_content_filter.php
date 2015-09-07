@@ -3,7 +3,7 @@
 		PHP Web Article Extractor
 		A PHP library to extract the primary article content of a web page.
 		
-		Based on the whitepaper 'Boilerplate detection using Shallow Text Features'
+		This class is based on the whitepaper 'Boilerplate detection using Shallow Text Features'
 		By Christian Kohlschuetter, Peter Fankhauser, Wolfgang Nejdl
 
 		Code author: Luke Hines
