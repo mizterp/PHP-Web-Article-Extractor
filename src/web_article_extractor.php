@@ -3,9 +3,6 @@
 		PHP Web Article Extractor
 		A PHP library to extract the primary article content of a web page.
 		
-		Based on the whitepaper 'Boilerplate detection using Shallow Text Features'
-		By Christian Kohlschuetter, Peter Fankhauser, Wolfgang Nejdl
-
 		Code author: Luke Hines
 		Licence: PHP Web Article Extractor is made available under the MIT License.
 	*/
@@ -22,6 +19,7 @@
 	include 'filters/largest_block_filter.php';
 	include 'filters/between_title_and_content_filter.php';
 	include 'filters/postextraction_filter.php';
+	include 'filters/language_filter.php';
 	
 	class WebArticleExtractor 
 	{
@@ -72,6 +70,9 @@
         	
         	// Post-extraction cleanup removing now irrelevant blocks and sets full title
         	PostExtractionFilter::filter($textDocument);
+        	
+        	// Determine document language
+        	LanguageFilter::filter($textDocument);
         	
 	        return $textDocument; 
 	    }
