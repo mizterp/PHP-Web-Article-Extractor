@@ -41,14 +41,14 @@
 		// Loads resource into memory
 		public function loadResource($resourceName)
 		{
-			$resourceLocation = dirname(__FILE__)."/../res/".$resourceName;
+			$resourceLocation = dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."res".DIRECTORY_SEPARATOR.$resourceName;
 			$this->resourceContent = ResourceProvider::readResourceToArray($resourceLocation);
 		}
 		
 		// Loads all resources found in a directory into memory
 		public function loadResourceDirectory($directoryName)
 		{
-			$resourceLocation = dirname(__FILE__)."/../res/".$directoryName;
+			$resourceLocation = dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."res".DIRECTORY_SEPARATOR.$directoryName;
 			$results = array();
 			
 			foreach (scandir($resourceLocation) as $file) 
@@ -59,7 +59,7 @@
 					$fileEntry = array();
 					$fileKey = str_replace(".lst","",$file);
 					$fileEntry[0] = $fileKey;
-					$fileEntry[1] = ResourceProvider::readResourceToArray($resourceLocation."/".$file);
+					$fileEntry[1] = ResourceProvider::readResourceToArray($resourceLocation.DIRECTORY_SEPARATOR.$file);
 					$results[] = $fileEntry;
 				}
 			}
