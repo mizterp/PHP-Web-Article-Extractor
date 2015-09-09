@@ -4,7 +4,9 @@ Web Article Extractor is a PHP library that detects and extracts the primary 'ar
 
 ## Features
 
-* Extract an article and headline from a page in milliseconds
+* Remove the clutter and extract clean article text and headline from a page quickly
+* Identifies the language of the extracted article
+* Identifies keywords of the extracted article
 * Designed to easily integrate into pipeline or microservice architectured projects
 
 ## Usage

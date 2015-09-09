@@ -3,12 +3,12 @@
 		PHP Web Article Extractor
 		A PHP library to extract the primary article content of a web page.
 
-		Code author: Luke Hines
+		Author: Luke Hines
 		Licence: PHP Web Article Extractor is made available under the MIT License.
 	*/
 	
 	/*
-	* Determins the language of the article by filtering out stop words
+	* Identifies the language of the article by filtering out stop words
 	* the language that has the most stop words filtered from the article is
 	* the most likely language of the text.
 	*/
@@ -19,12 +19,35 @@
 		{
 			$StopWordLanguageMap = new ResourceProvider("stop_words");
 			
+			$topLang = '';
+			$topScore = 0;
 			foreach ($StopWordLanguageMap->resourceContent as $value) 
 			{
 				//echo json_encode($value);
+				$regex = LanguageFilter::regexForWordList($value[1]);
+				$languageScore = preg_match_all($regex,$textDocument->articleText);
 				
-				//Generate regex on a per language basis
+				if($languageScore > $topScore)
+				{
+					$topLang = $value[0];
+					$topScore = $languageScore;
+				}
+				
+				$textDocument->language = $topLang;
 			}
+		}
+		
+		private static function regexForWordList($WordList)
+		{	
+			$result = '/(';
+			foreach ($WordList as $word) 
+			{
+				$result .= '\b'.preg_quote($word).'\b|';
+			}
+			
+			$result = rtrim($result, "|");
+			$result .= ')/i';
+			return $result;
 		}
 	}
 ?>  
