@@ -116,8 +116,13 @@
 			$title = $xpath->query('//title')->item(0)->textContent;
 			$body = $xpath->query('//body')->item(0);
 			
-			$this->recurse($body);
+			// Try to extract title from OG meta
+			foreach ($xpath->query("//meta[@property='og:title']") as $el) 
+			{
+				$title = $el->getAttribute("content");
+			}
 			
+			$this->recurse($body);
 			$textDocument = new TextDocument();
 			$textDocument->title = $title;
 			$textDocument->textBlocks = $this->textBlocks;
