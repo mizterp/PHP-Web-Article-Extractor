@@ -27,6 +27,10 @@
 				$regex = LanguageFilter::regexForWordList($value[1]);
 				$languageScore = preg_match_all($regex,$textDocument->articleText);
 				
+				// Uncomment for debug
+				//echo $value[0].'-'.$languageScore;
+				//echo '<br/>';
+				
 				if($languageScore > $topScore)
 				{
 					$topLang = $value[0];
@@ -42,7 +46,7 @@
 			$result = '/(';
 			foreach ($WordList as $word) 
 			{
-				$result .= '\b'.preg_quote($word).'\b|';
+				$result .= '\b'.preg_quote($word).'\b|'; //Requires unicode support
 			}
 			
 			$result = rtrim($result, "|");
