@@ -1,16 +1,17 @@
 <?php
-	/*	
-		PHP Web Article Extractor
-		A PHP library to extract the primary article content of a web page.
-
-		Code author: Luke Hines
-		Licence: PHP Web Article Extractor is made available under the MIT License.
-	*/
+	/**
+	 *	PHP Web Article Extractor
+	 *	A PHP library to extract the primary article content of a web page.
+	 *	
+	 *	@author Luke Hines
+	 *	@link https://github.com/zackslash/PHP-Web-Article-Extractor
+	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
+	 */
 	
-	/*
-	* Removes now irrelevant 'non-content' blocks.
-	* Sets 'full title' to title block text, if no text is found falls back to standard title.
-	*/
+	/**
+	 * Removes now irrelevant 'non-content' blocks.
+	 * Sets 'full title' to title block text, if no text is found falls back to standard title.
+	 */
 	
 	class PostExtractionFilter
 	{

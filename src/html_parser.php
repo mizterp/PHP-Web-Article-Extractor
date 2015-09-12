@@ -1,11 +1,12 @@
 <?php
-	/*	
-		PHP Web Article Extractor
-		A PHP library to extract the primary article content of a web page.
-
-		Code author: Luke Hines
-		Licence: PHP Web Article Extractor is made available under the MIT License.
-	*/
+	/**
+	 *	PHP Web Article Extractor
+	 *	A PHP library to extract the primary article content of a web page.
+	 *	
+	 *	@author Luke Hines
+	 *	@link https://github.com/zackslash/PHP-Web-Article-Extractor
+	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
+	 */
 	
 	class HTMLParser
 	{
@@ -113,7 +114,12 @@
 
 			// Extract title from DOM
 			$body = $xpath->query('/')->item(0);
-			$title = $xpath->query('//title')->item(0)->textContent;
+			$titleItem = $xpath->query('//title')->item(0);
+			
+			if(isset($titleItem))
+			{
+				$title = $titleItem->textContent;
+			}
 			$body = $xpath->query('//body')->item(0);
 			
 			// Try to extract title from OG meta
@@ -124,7 +130,10 @@
 			
 			$this->recurse($body);
 			$textDocument = new TextDocument();
-			$textDocument->title = $title;
+			if(isset($title))
+			{
+				$textDocument->title = $title;
+			}
 			$textDocument->textBlocks = $this->textBlocks;
 			return $textDocument;
 		}

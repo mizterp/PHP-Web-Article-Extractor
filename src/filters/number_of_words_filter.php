@@ -1,21 +1,21 @@
 <?php
-	/*	
-		PHP Web Article Extractor
-		A PHP library to extract the primary article content of a web page.
-		
-		This class is based on the whitepaper 'Boilerplate detection using Shallow Text Features'
-		By Christian Kohlschuetter, Peter Fankhauser, Wolfgang Nejdl
-
-		Code author: Luke Hines
-		Licence: PHP Web Article Extractor is made available under the MIT License.
-	*/
+	/**
+	 *	PHP Web Article Extractor
+	 *	A PHP library to extract the primary article content of a web page.
+	 *	
+	 *  This class is based on the whitepaper 'Boilerplate detection using Shallow Text Features'
+	 *  By Christian Kohlschuetter, Peter Fankhauser, Wolfgang Nejdl
+	 *
+	 *	@author Luke Hines
+	 *	@link https://github.com/zackslash/PHP-Web-Article-Extractor
+	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
+	 */
 	
-	/*
-		Number of words filter based on C4.8 Machine learning algorithm
-		Reference: 'Algorithm 2: Classifier based on Number of Words' 
-		in 'Boilerplate Detection using Shallow Text Features'
-	*/
-	
+	/**
+	 *	Number of words filter based on C4.8 Machine learning algorithm
+	 *	Reference: 'Algorithm 2: Classifier based on Number of Words' 
+	 *	in 'Boilerplate Detection using Shallow Text Features'
+	 */
 	class NumberOfWordsFilter
 	{
 		public static function filter(&$textDocument)
