@@ -59,7 +59,8 @@
 				$tag === 'EMBED' ||
 				$tag === 'APPLET' ||
 				$tag === 'NOSCRIPT' ||
-				$tag === 'LINK')
+				$tag === 'LINK' ||
+				$tag === 'NOINDEX')
 			{
 				return 0;
 			}
