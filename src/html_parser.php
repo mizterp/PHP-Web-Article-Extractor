@@ -31,73 +31,69 @@
 		private $offsetBlocks = 0;
 		private $textBlocks = array();
 		
-		/*
-			 -Last Event-
-			0 = START_TAG
-			1 = END_TAG
-			2 = CHARACTERS
-			3 = WHITESPACE
-		*/
+		/**
+		 *	 -Last Event-
+		 *	0 = START_TAG
+		 *	1 = END_TAG
+		 *	2 = CHARACTERS
+		 *	3 = WHITESPACE
+		 */
 		private $lastEvent = -1;
 		
+		// Resource stores
+		private $ignoreElements;
+		private $linkElements;
+		private $bodyElements;
+		private $inlineElements;
+		
 		/*
-		* - returns enumeration
-		* IGNORABLE_ELEMENT = 0
-		* ANCHOR_TEXT = 1
-		* BODY = 2
-		* INLINE_NO_WHITESPACE = 3
-		*/
+		 * - returns enumeration -
+		 * Element can be ignored = 0
+		 * Element is a link = 1
+		 * Element is HTML body = 2
+		 * Element is inline text = 3
+		 */
 		function getActionForTag($tag)
 		{
 			$tag = strtoupper($tag);
 			
-			// IGNORABLE_ELEMENT
-			if ($tag === 'STYLE' ||
-				$tag === 'SCRIPT' ||
-				$tag === 'OPTION' ||
-				$tag === 'OBJECT' ||
-				$tag === 'EMBED' ||
-				$tag === 'APPLET' ||
-				$tag === 'NOSCRIPT' ||
-				$tag === 'LINK' ||
-				$tag === 'NOINDEX')
+			// Ignorable elements
+			foreach($this->ignoreElements->resourceContent as $ignoreElement) 
 			{
-				return 0;
+				if ($ignoreElement === $tag)
+				{
+					return 0;
+				}
 			}
 			
-			// ANCHOR_TEXT
-			if ($tag === 'A')
+			// Link elements
+			foreach($this->linkElements->resourceContent as $linkElement) 
 			{
-				return 1;
+				if ($linkElement === $tag)
+				{
+					return 1;
+				}
+			}
+
+			// Body elements
+			foreach($this->bodyElements->resourceContent as $bodyElement) 
+			{
+				if ($bodyElement === $tag)
+				{
+					return 2;
+				}
 			}
 			
-			// BODY
-			if ($tag === 'BODY')
+			// inline elements
+			foreach($this->inlineElements->resourceContent as $inlineElement) 
 			{
-				return 2;
-			}
-			
-			// INLINE_NO_WHITESPACE
-			if ($tag === 'STRIKE' ||
-				$tag === 'U' ||
-				$tag === 'B' ||
-				$tag === 'I' ||
-				$tag === 'EM' ||
-				$tag === 'STRONG' ||
-				$tag === 'SUP' ||
-				$tag === 'CODE' ||
-				$tag === 'TT' ||
-				$tag === 'SUB' ||
-				$tag === 'VAR' ||
-				$tag === 'ABBR' ||
-				$tag === 'ACRONYM' ||
-				$tag === 'FONT')
-			{
-				return 3;
+				if ($inlineElement === $tag)
+				{
+					return 3;
+				}
 			}
 			
 			return -1;
-			
 		}
 
 		function parse($html)
@@ -106,6 +102,12 @@
 			libxml_use_internal_errors(true);
 			$dom->loadHTML($html);
 			$xpath = new DOMXPath($dom);
+			
+			// Load resources for tag actions
+			$this->ignoreElements = new ResourceProvider("html_tag_actions/ignore.lst");
+			$this->linkElements = new ResourceProvider("html_tag_actions/link.lst");
+			$this->bodyElements = new ResourceProvider("html_tag_actions/body.lst");
+			$this->inlineElements = new ResourceProvider("html_tag_actions/inline.lst");
 			
 		    /*	
 			 *  1st retrieve page title
