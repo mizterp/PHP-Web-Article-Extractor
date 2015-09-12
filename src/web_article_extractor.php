@@ -8,6 +8,7 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
+	require 'block_labels.php';
 	require 'text_document.php';
 	require 'html_parser.php';
 	require 'resource_provider.php';

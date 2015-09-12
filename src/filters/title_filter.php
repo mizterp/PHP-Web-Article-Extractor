@@ -108,7 +108,7 @@
 			{
 				if(in_array(strtolower($textBlock->text), array_map('strtolower', $possibleTitles)))
 				{
-					$textBlock->labels[] = "TITLE"; // TODO: Seperate label enumeration
+					$textBlock->labels[] = PHPWAE_TITLE_LABEL;
 					$textDocument->title = $textBlock->text;
 				}
 			}

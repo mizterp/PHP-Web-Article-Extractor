@@ -21,7 +21,7 @@
 			$textDocument->articleText = '';
 			foreach ($textDocument->textBlocks as $key => $textBlock) 
 			{
-				if(in_array("TITLE",$textBlock->labels))
+				if(in_array(PHPWAE_TITLE_LABEL,$textBlock->labels))
 				{
 					// Mark the title block as the documents 'full title'
 					$textDocument->fullTitle = $textBlock->text;

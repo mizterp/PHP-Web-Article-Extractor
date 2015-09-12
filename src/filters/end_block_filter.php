@@ -40,7 +40,7 @@
 						|| EndBlockFilter::stringContainsResourceEntry($blockTextLowerCase, $EndBlockContainsResource)
 						|| EndBlockFilter::stringMatchesResourceEntry($blockTextLowerCase, $EndBlockMatchesResource))
 						{
-							$textBlock->labels[] = "END BLOCK"; //TODO: Split labels into seperate area
+							$textBlock->labels[] = PHPWAE_END_BLOCK_LABEL; //TODO: Split labels into seperate area
 						}
 					}
 					else if($textBlock->linkDensity === 1)
@@ -48,7 +48,7 @@
 						$blockTextLowerCase = trim(strtolower($textBlock->text));
 						if(EndBlockFilter::stringMatchesResourceEntry($blockTextLowerCase, $EndBlockSingleLinkResource))
 						{
-							$textBlock->labels[] = "END BLOCK"; //TODO: Split labels into seperate area
+							$textBlock->labels[] = PHPWAE_END_BLOCK_LABEL; //TODO: Split labels into seperate area
 						}
 					}
 				}
@@ -56,7 +56,7 @@
 				{
 					if(EndBlockFilter::stringContainsResourceEntry($blockTextLowerCase, $EndBlockMatchesLargeBlockResource))
 					{
-						$textBlock->labels[] = "END BLOCK"; //TODO: Split labels into seperate area
+						$textBlock->labels[] = PHPWAE_END_BLOCK_LABEL; //TODO: Split labels into seperate area
 					}
 				}
 			}

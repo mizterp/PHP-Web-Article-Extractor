@@ -21,7 +21,7 @@
 			$pastTitle = false;
 			foreach ($textDocument->textBlocks as $key => $textBlock) 
 			{
-				if(in_array("TITLE",$textBlock->labels))
+				if(in_array(PHPWAE_TITLE_LABEL,$textBlock->labels))
 				{
 					// Start when hitting title
 					$pastTitle = true;

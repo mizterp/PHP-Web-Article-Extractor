@@ -43,7 +43,7 @@
 				if($key != $largestCountKey)
 				{
 					$textBlock->isContent = false;
-					$textBlock->labels[] = 'POSSIBLY CONTENT';
+					$textBlock->labels[] = PHPWAE_POSSIBLY_CONTENT_LABEL;
 				}
 			}
 		}

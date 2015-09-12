@@ -22,7 +22,7 @@
 			
 			foreach ($textDocument->textBlocks as $textBlock) 
 			{
-				$endBlock = in_array("END BLOCK", $textBlock->labels); //TODO: Split labels into seperate area
+				$endBlock = in_array(PHPWAE_END_BLOCK_LABEL, $textBlock->labels);
 
 				if($textBlock->isContent)
 				{
