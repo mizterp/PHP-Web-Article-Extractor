@@ -15,6 +15,8 @@
 	 */
 	class LanguageFilter
 	{
+		const WORD_MATCH_THRESSHOLD = 100; 
+	
 		public static function filter(&$textDocument)
 		{
 			$StopWordLanguageMap = new ResourceProvider("stop_words");
@@ -24,7 +26,7 @@
 			foreach ($StopWordLanguageMap->resourceContent as $value) 
 			{
 				//echo json_encode($value);
-				$regex = LanguageFilter::regexForWordList($value[1]);
+				$regex = LanguageFilter::regexForWordList($value[1],self::WORD_MATCH_THRESSHOLD);
 				$languageScore = preg_match_all($regex,$textDocument->articleText);
 				
 				// Uncomment for debug
@@ -41,12 +43,18 @@
 			}
 		}
 		
-		private static function regexForWordList($WordList)
+		private static function regexForWordList($WordList,$MaxWordCount)
 		{	
 			$result = '/(';
+			$count = 0;
 			foreach ($WordList as $word) 
 			{
 				$result .= '\b'.preg_quote($word).'\b|'; //Requires unicode support
+				$count++;
+				if($count >= $MaxWordCount)
+				{
+					break;
+				}
 			}
 			
 			$result = rtrim($result, "|");
