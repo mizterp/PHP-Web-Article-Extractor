@@ -39,6 +39,11 @@
 				}
 			}
 			
+			// Treat &nbsp as a space in all filters beyond here
+			$textDocument->articleText = htmlentities($textDocument->articleText, null, 'utf-8');
+            $textDocument->articleText = str_replace("&nbsp;", " ", $textDocument->articleText);
+			$textDocument->articleText = html_entity_decode($textDocument->articleText, null, 'utf-8');
+			
 			if(!isset($textDocument->fullTitle))
 			{
 				$textDocument->fullTitle = $textDocument->title; 
