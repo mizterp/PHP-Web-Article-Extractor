@@ -1,0 +1,17 @@
+{
+	"name": "zackslash/web-article-extractor",
+	"description": "Web Article Extractor",
+	"version": "0.0.1",
+	"homepage": "https://github.com/zackslash/PHP-Web-Article-Extractor",
+	"license": "MIT",
+	"minimum-stability": "dev",
+	"require": {
+		"php": ">=5.5.0"
+	},
+	"require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+	"autoload": {
+		"psr-4": { "PHP-Web-Article-Extractor\\": "src/" }
+	}
+}
