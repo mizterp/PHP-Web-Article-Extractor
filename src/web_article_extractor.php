@@ -21,6 +21,7 @@
 	include 'filters/largest_block_filter.php';
 	include 'filters/between_title_and_content_filter.php';
 	include 'filters/postextraction_filter.php';
+	include 'filters/line_filter.php';
 	include 'filters/language_filter.php';
 	include 'filters/keyword_filter.php';
 	
@@ -73,6 +74,9 @@
         	
         	// Post-extraction cleanup removing now irrelevant blocks and sets full title
         	PostExtractionFilter::filter($textDocument);
+        	
+        	// Scans article line by line removing non-content on a per-line basis
+        	LineFilter::filter($textDocument);
         	
         	// Determine document language
         	LanguageFilter::filter($textDocument);
