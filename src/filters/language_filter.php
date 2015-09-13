@@ -15,7 +15,7 @@
 	 */
 	class LanguageFilter
 	{
-		const WORD_MATCH_THRESSHOLD = 100;
+		const WORD_MATCH_THRESSHOLD = 200;
 	
 		public static function filter(&$textDocument)
 		{
