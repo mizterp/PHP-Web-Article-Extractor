@@ -8,7 +8,14 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
-	const PHPWAE_END_BLOCK_LABEL = 'END BLOCK';
-	const PHPWAE_POSSIBLY_CONTENT_LABEL = 'POSSIBLY CONTENT';
-	const PHPWAE_TITLE_LABEL = 'TITLE';	
-?>
+	class KeywordFilter
+	{
+		public static function filter(&$textDocument)
+		{
+			$textDocument->keywords = array();
+			
+			//array_push($textDocument->keywords,"Test","Two");
+			//$StopWordsForLanguage = new ResourceProvider("stop_words");
+		}
+	}
+?>  

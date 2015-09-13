@@ -22,6 +22,7 @@
 	include 'filters/between_title_and_content_filter.php';
 	include 'filters/postextraction_filter.php';
 	include 'filters/language_filter.php';
+	include 'filters/keyword_filter.php';
 	
 	class WebArticleExtractor 
 	{
@@ -75,6 +76,9 @@
         	
         	// Determine document language
         	LanguageFilter::filter($textDocument);
+        	
+        	// Filter keywords from the article document
+        	KeywordFilter::filter($textDocument);
         	
 	        return $textDocument; 
 	    }
