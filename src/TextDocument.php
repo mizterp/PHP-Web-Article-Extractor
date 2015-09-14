@@ -1,4 +1,4 @@
-<?php
+<?php namespace WebArticleExtractor;
 	/**
 	 *	PHP Web Article Extractor
 	 *	A PHP library to extract the primary article content of a web page.
@@ -8,8 +8,6 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
-	require 'text_block.php';
-
 	class TextDocument 
 	{
 		public $title; // The title of the article

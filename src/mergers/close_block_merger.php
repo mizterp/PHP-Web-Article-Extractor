@@ -1,4 +1,4 @@
-<?php
+<?php namespace WebArticleExtractor\Mergers;
 	/**
 	 *	PHP Web Article Extractor
 	 *	A PHP library to extract the primary article content of a web page.

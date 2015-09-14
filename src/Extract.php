@@ -1,4 +1,4 @@
-<?php
+<?php namespace WebArticleExtractor;
 	/**
 	 *	PHP Web Article Extractor
 	 *	A PHP library to extract the primary article content of a web page.
@@ -7,25 +7,8 @@
 	 *	@link https://github.com/zackslash/PHP-Web-Article-Extractor
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
-	
-	require 'block_labels.php';
-	require 'text_document.php';
-	require 'html_parser.php';
-	require 'resource_provider.php';
-	include 'mergers/close_block_merger.php';
-	include	'filters/title_filter.php';
-	include 'filters/end_block_filter.php';
-	include 'filters/number_of_words_filter.php';
-	include 'filters/postcontent_filter.php';
-	include 'filters/non_content_filter.php';
-	include 'filters/largest_block_filter.php';
-	include 'filters/between_title_and_content_filter.php';
-	include 'filters/postextraction_filter.php';
-	include 'filters/line_filter.php';
-	include 'filters/language_filter.php';
-	include 'filters/keyword_filter.php';
-	
-	class WebArticleExtractor 
+
+	class Extract 
 	{
 		// Extracts article 'main' content from a given URL
 		public static function extractFromURL($url) 
@@ -49,7 +32,7 @@
         	$textDocument = $parser->parse($rawHTMLPage);
         	
         	// Filter out clean article title
-			TitleFilter::filter($textDocument);
+			Filters\TitleFilter::filter($textDocument);
         	
         	// Discover article 'end' points using syntactic terminators
         	EndBlockFilter::filter($textDocument);

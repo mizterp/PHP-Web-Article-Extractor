@@ -1,4 +1,4 @@
-<?php
+<?php namespace WebArticleExtractor;
 	/**
 	 *	PHP Web Article Extractor
 	 *	A PHP library to extract the primary article content of a web page.
@@ -8,7 +8,10 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
-	const PHPWAE_END_BLOCK_LABEL = 'END BLOCK';
-	const PHPWAE_POSSIBLY_CONTENT_LABEL = 'POSSIBLY CONTENT';
-	const PHPWAE_TITLE_LABEL = 'TITLE';	
+	class BlockLabels
+	{
+		const END_BLOCK_LABEL = 'END BLOCK';
+		const POSSIBLY_CONTENT_LABEL = 'POSSIBLY CONTENT';
+		const TITLE_LABEL = 'TITLE';
+	}
 ?>

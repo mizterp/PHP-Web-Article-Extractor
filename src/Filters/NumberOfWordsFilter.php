@@ -1,4 +1,4 @@
-<?php
+<?php namespace WebArticleExtractor\Filters;
 	/**
 	 *	PHP Web Article Extractor
 	 *	A PHP library to extract the primary article content of a web page.

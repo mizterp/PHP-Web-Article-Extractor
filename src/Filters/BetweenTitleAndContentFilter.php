@@ -1,4 +1,4 @@
-<?php
+<?php namespace WebArticleExtractor\Filters;
 	/**
 	 *	PHP Web Article Extractor
 	 *	A PHP library to extract the primary article content of a web page.
@@ -10,33 +10,33 @@
 	 *	@link https://github.com/zackslash/PHP-Web-Article-Extractor
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
-	
-	class PostcontentFilter
+
+	/**
+	 * Marks blocks between the 'title' and 'largest block' as content. Will not mark title itself as content
+	 */
+	class BetweenTitleAndContentFilter
 	{
-		const WORD_COUNT_THRESHOLD = 60; 
-	
 		public static function filter(&$textDocument)
 		{
-			$numberOfWords = 0;
-			$foundEndOfText = false;
-			
-			foreach ($textDocument->textBlocks as $textBlock) 
+			$pastTitle = false;
+			foreach ($textDocument->textBlocks as $key => $textBlock) 
 			{
-				$endBlock = in_array(PHPWAE_END_BLOCK_LABEL, $textBlock->labels);
-
+				if(in_array(PHPWAE_TITLE_LABEL,$textBlock->labels))
+				{
+					// Start when hitting title
+					$pastTitle = true;
+					continue;
+				}
+				
+				if($pastTitle)
+				{
+					$textBlock->isContent = true;
+				}
+				
 				if($textBlock->isContent)
 				{
-					$numberOfWords += $textBlock->numFullTextWords;
-				}
-				
-				if($endBlock && $numberOfWords >= self::WORD_COUNT_THRESHOLD)
-				{
-					$foundEndOfText = true;
-				}
-				
-				if($foundEndOfText)
-				{
-					$textBlock->isContent = false;
+					// End once hit content
+					return;
 				}
 			}
 		}

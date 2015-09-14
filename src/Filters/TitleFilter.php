@@ -1,4 +1,4 @@
-<?php
+<?php namespace WebArticleExtractor\Filters;
 	/**
 	 *	PHP Web Article Extractor
 	 *	A PHP library to extract the primary article content of a web page.
@@ -7,7 +7,7 @@
 	 *	@link https://github.com/zackslash/PHP-Web-Article-Extractor
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
-	
+	namespace WebArticleExtractor\Filters;
 	class TitleFilter
 	{
 		private $possibleTitles = array();
@@ -108,7 +108,7 @@
 			{
 				if(in_array(strtolower($textBlock->text), array_map('strtolower', $possibleTitles)))
 				{
-					$textBlock->labels[] = PHPWAE_TITLE_LABEL;
+					$textBlock->labels[] = BlockLabels::TITLE_LABEL;
 					$textDocument->title = $textBlock->text;
 				}
 			}
