@@ -8,11 +8,6 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
-	require(dirname(__FILE__).'/../src/filters/title_filter.php');
-	require(dirname(__FILE__).'/../src/html_parser.php');
-	require(dirname(__FILE__).'/../src/resource_provider.php');
-	require(dirname(__FILE__).'/../src/text_document.php');
-	
 	class TitleFilterTest extends PHPUnit_Framework_TestCase  
 	{
 		private $testDocument;
@@ -40,7 +35,7 @@ EOL;
 		
 		public function setUp()
 		{
-			$parser = new HTMLParser();
+			$parser = new WebArticleExtractor\HTMLParser();
 			$this->testDocument = $parser->parse($this->testHTMLPage);
 		}
 		
@@ -51,7 +46,7 @@ EOL;
 	
     	public function testTitleFilter()
     	{
-			TitleFilter::filter($this->testDocument);
+			WebArticleExtractor\Filters\TitleFilter::filter($this->testDocument);
 			echo 'Got Title:'.$this->testDocument->title;
 			$this->assertEquals($this->expectedTitle, $this->testDocument->title);
     	}
