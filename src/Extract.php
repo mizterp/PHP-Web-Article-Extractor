@@ -1,4 +1,4 @@
-<?php namespace zackslash\PHP-Web-Article-Extractor;
+<?php namespace WebArticleExtractor;
 	/**
 	 *	PHP Web Article Extractor
 	 *	A PHP library to extract the primary article content of a web page.
