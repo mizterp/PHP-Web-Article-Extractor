@@ -13,6 +13,6 @@
     },
 	"autoload": {
 		"psr-4": { 
-		"PHP-Web-Article-Extractor\\": "src/" }
+		"zackslash\\PHP-Web-Article-Extractor\\": "src/" }
 	}
 }
