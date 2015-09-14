@@ -4,10 +4,10 @@ Web Article Extractor is a PHP library that detects and extracts the primary 'ar
 
 ## Features
 
-* Remove the clutter and extract clean article text and headline from a page quickly
+* Extract clean article and headline text from a page quickly
 * Identifies the language of the extracted article
 * Identifies keywords of the extracted article
-* Designed to easily integrate into pipeline or microservice architectured projects
+* Designed to easily integrate into pipeline or microservice project architectures
 
 ## Usage
 There are two ways to use Web Article Extractor, the first way is to use the provided docker file (See 'Installation'), this will create you an instance that you can start using straight away and is ideal for pipeline architectures, the second way is to integrate the PHP library directly into your project.
@@ -51,7 +51,7 @@ Alternatively, you can manually add the dependency to `composer.json` file...
 ```json
 {
     "require": {
-        "project_full_name": "stable_version"
+        "zackslash/php-web-article-extractor": "*"
     }
 }
 ```
@@ -62,7 +62,7 @@ $ php composer.phar install
 ```
 ## Requirements
 
-* PHP >= 5.6.10
+* PHP >= 5.5.0
 
 ## Running the Tests
 
@@ -80,8 +80,13 @@ phpunit
 
 ## Acknowledgements
 
-PHP Web Article Extractor is based on algorithms from the whitepaper ['Boilerplate detection using Shallow Text Features'](http://www.l3s.de/~kohlschuetter/publications/wsdm187-kohlschuetter.pdf) 
+Parts of PHP Web Article Extractor are based on algorithms from the whitepaper ['Boilerplate detection using Shallow Text Features'](http://www.l3s.de/~kohlschuetter/publications/wsdm187-kohlschuetter.pdf) 
 and 'Boilerpipe' by By Christian Kohlschuetter, Peter Fankhauser, Wolfgang Nejdl
+
+PHP Web Article Extractor implements the Rapid Automatic Keyword Extraction (RAKE) algorithm as described in the book ['Text Mining: Theory and Applications'](http://www.amazon.com/Text-Mining-Applications-Michael-Berry/dp/0470749822) and the implementation was based on [aneesha's open source Python version](https://github.com/aneesha/RAKE)
+
+The Stop Word dictionary used in this project was pulled from [Peter Graham's 'stopwords' repository](https://github.com/6/stopwords)
+
 
 ## License
 
