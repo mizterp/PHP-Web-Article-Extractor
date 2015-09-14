@@ -7,6 +7,8 @@
 	 *	@link https://github.com/zackslash/PHP-Web-Article-Extractor
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
+	 
+	use \WebArticleExtractor\BlockLabels as Labels;
 	
 	/**
 	 * Removes now irrelevant 'non-content' blocks.
@@ -21,7 +23,7 @@
 			$textDocument->articleText = '';
 			foreach ($textDocument->textBlocks as $key => $textBlock) 
 			{
-				if(in_array(PHPWAE_TITLE_LABEL,$textBlock->labels))
+				if(in_array(Labels::TITLE_LABEL,$textBlock->labels))
 				{
 					// Mark the title block as the documents 'full title'
 					$textDocument->fullTitle = $textBlock->text;

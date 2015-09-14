@@ -8,8 +8,7 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
-	require_once 'src/Extract.php';
-	//spl_autoload_register();
+	require_once 'vendor/autoload.php';
 	
 	if(isset($_GET['article']))
 	{

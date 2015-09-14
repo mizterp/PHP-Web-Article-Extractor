@@ -98,10 +98,10 @@
 
 		function parse($html)
 		{
-			$dom = new DOMDocument();
+			$dom = new \DOMDocument();
 			libxml_use_internal_errors(true);
 			$dom->loadHTML($html);
-			$xpath = new DOMXPath($dom);
+			$xpath = new \DOMXPath($dom);
 			
 			// Load resources for tag actions
 			$this->ignoreElements = new ResourceProvider("html_tag_actions/ignore.lst");

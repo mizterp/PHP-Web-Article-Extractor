@@ -35,37 +35,37 @@
 			Filters\TitleFilter::filter($textDocument);
         	
         	// Discover article 'end' points using syntactic terminators
-        	EndBlockFilter::filter($textDocument);
+        	Filters\EndBlockFilter::filter($textDocument);
         	
         	// Filter content using word count and link density using algorithm from Machine learning
-        	NumberOfWordsFilter::filter($textDocument);
+        	Filters\NumberOfWordsFilter::filter($textDocument);
         	
         	// Filter blocks that come after content
-        	PostcontentFilter::filter($textDocument);
+        	Filters\PostcontentFilter::filter($textDocument);
         	
         	// Merge close blocks
-        	CloseBlockMerger::merge($textDocument, false);
+        	Mergers\CloseBlockMerger::merge($textDocument, false);
         	
         	// Remove blocks that are not content
-        	NonContentFilter::filter($textDocument);
+        	Filters\NonContentFilter::filter($textDocument);
         	
         	// Mark largest block as 'content'
-        	LargestBlockFilter::filter($textDocument);
+        	Filters\LargestBlockFilter::filter($textDocument);
         	
 			// Mark blocks found between the title and main content as content as well
-        	BetweenTitleAndContentFilter::filter($textDocument);
+        	Filters\BetweenTitleAndContentFilter::filter($textDocument);
         	
         	// Post-extraction cleanup removing now irrelevant blocks and sets full title
-        	PostExtractionFilter::filter($textDocument);
+        	Filters\PostExtractionFilter::filter($textDocument);
         	
         	// Scans article line by line removing non-content on a per-line basis
-        	LineFilter::filter($textDocument);
+        	Filters\LineFilter::filter($textDocument);
         	
         	// Determine document language
-        	LanguageFilter::filter($textDocument);
+        	Filters\LanguageFilter::filter($textDocument);
         	
         	// Filter keywords from the article document
-        	KeywordFilter::filter($textDocument);
+        	Filters\KeywordFilter::filter($textDocument);
         	
 	        return $textDocument; 
 	    }

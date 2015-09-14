@@ -19,7 +19,7 @@
 	
 		public static function filter(&$textDocument)
 		{
-			$StopWordLanguageMap = new ResourceProvider("stop_words");
+			$StopWordLanguageMap = new \WebArticleExtractor\ResourceProvider("stop_words");
 			
 			$topLang = '';
 			$topScore = 0;

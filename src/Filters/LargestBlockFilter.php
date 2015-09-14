@@ -11,6 +11,8 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	 
+	use \WebArticleExtractor\BlockLabels as Labels;
+	 
 	/**
 	 * Filters all blocks asside from the largest.
 	 * Largest is determined by number of words.
@@ -43,7 +45,7 @@
 				if($key != $largestCountKey)
 				{
 					$textBlock->isContent = false;
-					$textBlock->labels[] = PHPWAE_POSSIBLY_CONTENT_LABEL;
+					$textBlock->labels[] = Labels::POSSIBLY_CONTENT_LABEL;
 				}
 			}
 		}

@@ -10,7 +10,9 @@
 	 *	@link https://github.com/zackslash/PHP-Web-Article-Extractor
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
-
+	 
+	use \WebArticleExtractor\BlockLabels as Labels;
+	
 	/**
 	 * Marks blocks between the 'title' and 'largest block' as content. Will not mark title itself as content
 	 */
@@ -21,7 +23,7 @@
 			$pastTitle = false;
 			foreach ($textDocument->textBlocks as $key => $textBlock) 
 			{
-				if(in_array(PHPWAE_TITLE_LABEL,$textBlock->labels))
+				if(in_array(Labels::TITLE_LABEL,$textBlock->labels))
 				{
 					// Start when hitting title
 					$pastTitle = true;

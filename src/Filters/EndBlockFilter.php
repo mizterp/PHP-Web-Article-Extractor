@@ -7,10 +7,12 @@
 	 *	@link https://github.com/zackslash/PHP-Web-Article-Extractor
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
+	 
+	use WebArticleExtractor;
+	use \WebArticleExtractor\BlockLabels as Labels;
 	
 	class EndBlockFilter
 	{
-		
 		public static function filter(&$textDocument)
 		{
 			/*
@@ -18,12 +20,12 @@
 			 * this means the list can possibly be updated while in production without a 
 			 * redeploy of the source
 			 */
-			$EndBlockStartsWithResource = new ResourceProvider("end_block_lists/starts_with.lst");
-			$EndBlockContainsResource = new ResourceProvider("end_block_lists/contains.lst");
-			$EndBlockMatchesResource = new ResourceProvider("end_block_lists/matches.lst");
-			$EndBlockSingleLinkResource = new ResourceProvider("end_block_lists/single_link.lst");
-			$EndBlockMatchesLargeBlockResource = new ResourceProvider("end_block_lists/large_blocks.lst");
-			$EndBlockFollowsNumberResource = new ResourceProvider("end_block_lists/follows_number.lst");
+			$EndBlockStartsWithResource = new WebArticleExtractor\ResourceProvider("end_block_lists/starts_with.lst");
+			$EndBlockContainsResource = new WebArticleExtractor\ResourceProvider("end_block_lists/contains.lst");
+			$EndBlockMatchesResource = new WebArticleExtractor\ResourceProvider("end_block_lists/matches.lst");
+			$EndBlockSingleLinkResource = new WebArticleExtractor\ResourceProvider("end_block_lists/single_link.lst");
+			$EndBlockMatchesLargeBlockResource = new WebArticleExtractor\ResourceProvider("end_block_lists/large_blocks.lst");
+			$EndBlockFollowsNumberResource = new WebArticleExtractor\ResourceProvider("end_block_lists/follows_number.lst");
 		
 			// Loop through article to find blocks that indicate the end of an article
 			foreach ($textDocument->textBlocks as $textBlock) 
@@ -40,7 +42,7 @@
 						|| EndBlockFilter::stringContainsResourceEntry($blockTextLowerCase, $EndBlockContainsResource)
 						|| EndBlockFilter::stringMatchesResourceEntry($blockTextLowerCase, $EndBlockMatchesResource))
 						{
-							$textBlock->labels[] = PHPWAE_END_BLOCK_LABEL; //TODO: Split labels into seperate area
+							$textBlock->labels[] = Labels::END_BLOCK_LABEL; //TODO: Split labels into seperate area
 						}
 					}
 					else if($textBlock->linkDensity === 1)
@@ -48,7 +50,7 @@
 						$blockTextLowerCase = trim(strtolower($textBlock->text));
 						if(EndBlockFilter::stringMatchesResourceEntry($blockTextLowerCase, $EndBlockSingleLinkResource))
 						{
-							$textBlock->labels[] = PHPWAE_END_BLOCK_LABEL; //TODO: Split labels into seperate area
+							$textBlock->labels[] = Labels::END_BLOCK_LABEL; //TODO: Split labels into seperate area
 						}
 					}
 				}
@@ -56,7 +58,7 @@
 				{
 					if(EndBlockFilter::stringContainsResourceEntry($blockTextLowerCase, $EndBlockMatchesLargeBlockResource))
 					{
-						$textBlock->labels[] = PHPWAE_END_BLOCK_LABEL; //TODO: Split labels into seperate area
+						$textBlock->labels[] = Labels::END_BLOCK_LABEL; //TODO: Split labels into seperate area
 					}
 				}
 			}

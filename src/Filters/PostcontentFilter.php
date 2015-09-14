@@ -10,6 +10,8 @@
 	 *	@link https://github.com/zackslash/PHP-Web-Article-Extractor
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
+	 
+	use \WebArticleExtractor\BlockLabels as Labels;
 	
 	class PostcontentFilter
 	{
@@ -22,7 +24,7 @@
 			
 			foreach ($textDocument->textBlocks as $textBlock) 
 			{
-				$endBlock = in_array(PHPWAE_END_BLOCK_LABEL, $textBlock->labels);
+				$endBlock = in_array(Labels::END_BLOCK_LABEL, $textBlock->labels);
 
 				if($textBlock->isContent)
 				{

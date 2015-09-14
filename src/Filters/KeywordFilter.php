@@ -28,7 +28,7 @@
 			}
 			
 			// Stop words are language dependant so this filter relies on previously detected language
-			$stopWordResource = new ResourceProvider("stop_words/".$textDocument->language.".lst");
+			$stopWordResource = new \WebArticleExtractor\ResourceProvider("stop_words/".$textDocument->language.".lst");
 			$textDocument->keywords = array();
 			
 			// Append article title, its likely keywords will be in here.
