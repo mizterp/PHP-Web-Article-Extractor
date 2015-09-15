@@ -147,7 +147,7 @@
 			return $word_score;
 		}
 		
-		public static function getPhraseScores($phrases, $wordScores) 
+		private static function getPhraseScores($phrases, $wordScores) 
 		{
 			$phrase_scores = array();
 			
