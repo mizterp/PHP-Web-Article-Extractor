@@ -24,8 +24,8 @@
 		}
 		
 		// Extracts article 'main' text from HTML
-        public static function extractFromHTML($rawHTMLPage) 
-        { 
+		public static function extractFromHTML($rawHTMLPage) 
+		{ 
         	$parser = new HTMLParser();
         	
         	// Parse HTML into blocks
@@ -68,6 +68,6 @@
         	Filters\KeywordFilter::filter($textDocument);
         	
         	return $textDocument; 
-	    }
+		}
     }
 ?>  
