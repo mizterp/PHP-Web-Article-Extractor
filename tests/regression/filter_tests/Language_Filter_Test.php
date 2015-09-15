@@ -32,16 +32,16 @@ EOL;
 			$testDocument = null;
 		}
 	
-    	public function testLanguageDetection()
-    	{
-    		$DetectionSuccess = false;
+		public function testLanguageDetection()
+		{
+			$DetectionSuccess = false;
     		
-    		//English
-    		$this->testDocument->articleText = $this->englishTestArticle;
-    		WebArticleExtractor\Filters\LanguageFilter::filter($this->testDocument);
-    		$DetectionSuccess = $this->testDocument->language === "en";
+			//English
+			$this->testDocument->articleText = $this->englishTestArticle;
+			WebArticleExtractor\Filters\LanguageFilter::filter($this->testDocument);
+			$DetectionSuccess = $this->testDocument->language === "en";
 			
 			$this->assertEquals(true, $DetectionSuccess);
-    	}
+		}
 	}
 ?>  

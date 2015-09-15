@@ -23,11 +23,11 @@
 			$testDocument = null;
 		}
 	
-    	public function testRemovalOfNoncontent()
-    	{
+		public function testRemovalOfNoncontent()
+		{
 			//WebArticleExtractor\Filters\TitleFilter::filter($this->testDocument);
 			//echo 'Got Title:'.$this->testDocument->title;
 			$this->assertEquals("", "");
-    	}
+		}
 	}
 ?>  

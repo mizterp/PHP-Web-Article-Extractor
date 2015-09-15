@@ -43,10 +43,10 @@
 			$testDocument = null;
 		}
 	
-    	public function testMarkingAsContentBetweenExistingContentAndTitle()
-    	{
+		public function testMarkingAsContentBetweenExistingContentAndTitle()
+		{
 			WebArticleExtractor\Filters\BetweenTitleAndContentFilter::filter($this->testDocument);
 			$this->assertTrue($this->testDocument->textBlocks[1]->isContent);
-    	}
+		}
 	}
 ?>  

@@ -44,10 +44,10 @@ EOL;
 			$testDocument = null;
 		}
 	
-    	public function testReadingTitleFromArticle()
-    	{
+		public function testReadingTitleFromArticle()
+		{
 			WebArticleExtractor\Filters\TitleFilter::filter($this->testDocument);
 			$this->assertEquals($this->expectedTitle, $this->testDocument->title);
-    	}
+		}
 	}
 ?>  

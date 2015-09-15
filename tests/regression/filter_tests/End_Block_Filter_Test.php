@@ -44,11 +44,11 @@ EOL;
 			$testDocument = null;
 		}
 	
-    	public function testRemovingContentAfterEndBlock()
-    	{
+		public function testRemovingContentAfterEndBlock()
+		{
 			WebArticleExtractor\Filters\EndBlockFilter::filter($this->testDocument);
 			echo 'Got Text:'.$this->testDocument->articleText;
 			$this->assertEquals("", "");
-    	}
+		}
 	}
 ?>  

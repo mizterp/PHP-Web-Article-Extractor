@@ -22,11 +22,11 @@
 			$testDocument = null;
 		}
 	
-    	public function testFilteringOfLargestBlock()
-    	{
+		public function testFilteringOfLargestBlock()
+		{
 			//WebArticleExtractor\Filters\TitleFilter::filter($this->testDocument);
 			//echo 'Got Title:'.$this->testDocument->title;
 			$this->assertEquals("", "");
-    	}
+		}
 	}
 ?>  

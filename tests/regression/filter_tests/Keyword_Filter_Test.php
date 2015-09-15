@@ -37,8 +37,8 @@ EOL;
 			$testDocument = null;
 		}
 	
-    	public function testExtractionOfKeywords()
-    	{
+		public function testExtractionOfKeywords()
+		{
 			WebArticleExtractor\Filters\KeywordFilter::filter($this->testDocument);
 			$allKeywordsPresent = true;
 			
@@ -66,6 +66,6 @@ EOL;
 				}
 			}
 			$this->assertTrue($allKeywordsPresent);
-    	}
+		}
 	}
 ?>  
