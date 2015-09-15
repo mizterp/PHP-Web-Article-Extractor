@@ -44,10 +44,9 @@ EOL;
 			$testDocument = null;
 		}
 	
-    	public function testTitleFilter()
+    	public function testReadingTitleFromArticle()
     	{
 			WebArticleExtractor\Filters\TitleFilter::filter($this->testDocument);
-			echo 'Got Title:'.$this->testDocument->title;
 			$this->assertEquals($this->expectedTitle, $this->testDocument->title);
     	}
 	}
