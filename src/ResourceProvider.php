@@ -31,13 +31,13 @@
 		{
 			if((($temp = strlen($resourceLocation) - strlen(".lst")) >= 0 && strpos($resourceLocation, ".lst", $temp) !== FALSE)) // Attempting to load resource file
 			{
-       			$this->loadResource($resourceLocation);
-       		}
-       		else // Attempting to load resource directory
-       		{
-       			$this->loadResourceDirectory($resourceLocation);
-       		}
-  		}
+				$this->loadResource($resourceLocation);
+			}
+			else // Attempting to load resource directory
+			{
+				$this->loadResourceDirectory($resourceLocation);
+			}
+		}
 		
 		// Loads resource into memory
 		public function loadResource($resourceName)

@@ -139,16 +139,16 @@
 				$p = $parts[$i];
 				if (strpos($p, '.com') !== FALSE) // TODO: Possible validation for other domains?
 				{
-    				continue;
-    			}
+					continue;
+				}
     			
-    			$numberOfWords = count(preg_split('/[\b]+/',$p));
+				$numberOfWords = count(preg_split('/[\b]+/',$p));
     			
-    			if($numberOfWords > $longestNumberofWords  || strlen($p) > strlen($longestPart))
-    			{
-    				$longestNumberofWords = $numberOfWords;
-    				$longestPart = $p;
-    			}
+				if($numberOfWords > $longestNumberofWords  || strlen($p) > strlen($longestPart))
+				{
+					$longestNumberofWords = $numberOfWords;
+					$longestPart = $p;
+				}
 			}
 			
 			return trim($longestPart);

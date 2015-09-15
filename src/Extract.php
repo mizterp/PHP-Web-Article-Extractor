@@ -20,8 +20,8 @@
 				return;
 			}
 	        
-	        return self::extractFromHTML($html);
-	    }
+			return self::extractFromHTML($html);
+		}
 		
 		// Extracts article 'main' text from HTML
         public static function extractFromHTML($rawHTMLPage) 
@@ -31,7 +31,7 @@
         	// Parse HTML into blocks
         	$textDocument = $parser->parse($rawHTMLPage);
         	
-        	// Filter out clean article title
+			// Filter out clean article title
 			Filters\TitleFilter::filter($textDocument);
         	
         	// Discover article 'end' points using syntactic terminators

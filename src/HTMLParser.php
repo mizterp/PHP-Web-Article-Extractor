@@ -109,7 +109,7 @@
 			$this->bodyElements = new ResourceProvider("html_tag_actions/body.lst");
 			$this->inlineElements = new ResourceProvider("html_tag_actions/inline.lst");
 			
-		    /*	
+			/*	
 			 *  1st retrieve page title
 			 *  With this technique: only process the entire document here 
 			 *  as meta is excluded as 'content' and only required for initial title.

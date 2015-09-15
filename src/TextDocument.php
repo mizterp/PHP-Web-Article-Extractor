@@ -15,5 +15,5 @@
 		public $textBlocks; // Raw text block of article
 		public $language; // The language of the article
 		public $keywords; // The key words of the article
-    }
+	}
 ?>  

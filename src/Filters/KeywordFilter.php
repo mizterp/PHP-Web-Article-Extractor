@@ -3,9 +3,9 @@
 	 *	PHP Web Article Extractor
 	 *	A PHP library to extract the primary article content of a web page.
 	 *
-	 *  Attempts to extract the article's keywords using an implementation of the 
+	 *	Attempts to extract the article's keywords using an implementation of the 
 	 *	Rapid Automatic Keyword Extraction (RAKE) algorithm 
-	 *  as described in the book 'Text Mining: Theory and Applications'
+	 *	as described in the book 'Text Mining: Theory and Applications'
 	 *	http://www.amazon.com/Text-Mining-Applications-Michael-Berry/dp/0470749822
 	 *	Also based on this python RAKE implementation 'https://github.com/aneesha/RAKE'
 	 *	
