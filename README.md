@@ -1,6 +1,6 @@
 # PHP Web Article Extractor
 
-Web Article Extractor is a PHP library that detects and extracts the primary 'article' content from a web page, detecting and removing the 'clutter' to give you the clean article, additionally it will also filter information from the article that can be used for indexing, such as *language* and *keywords*. 
+Web Article Extractor is a PHP library that detects and extracts the primary 'article' content from a web page, detecting and removing the 'clutter' to give you the clean article. Additionally, it will also filter information from the article that can be used for indexing, such as *language* and *keywords*. 
 
 ## Features
 
@@ -10,7 +10,7 @@ Web Article Extractor is a PHP library that detects and extracts the primary 'ar
 * Designed to easily integrate into pipeline or microservice project architectures.
 
 ## Usage
-There are two ways to use Web Article Extractor, the first way is to use the provided docker file (See 'Installation'), this will create an instance that you can start using straight away and is ideal for pipeline architectures, the second way is to add the PHP library directly into your project through Composer.
+There are two ways to use Web Article Extractor, the first way is to use the provided docker file (See 'Installation'), this will create an instance that you can start using straight away and is ideal for pipeline architectures, the second way is to add the PHP library into your project through Composer.
 
 PHP simple example:
 
@@ -68,7 +68,7 @@ $ php composer.phar install
 
 ## Running the Tests (Optional)
 
-To run the unit tests, you'll need to install [PHPUnit](https://phpunit.de/), once installed, just launch the following command inside this libraries 'build' directory:
+To run the unit tests, you'll need to install [PHPUnit](https://phpunit.de/), once installed, just launch the following command inside this libraries' 'build' directory:
 
 ```
 phpunit
