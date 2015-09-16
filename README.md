@@ -31,7 +31,7 @@ echo json_encode($extractionResult);
 
 ## Installation
 #### Docker
-TODO:
+*Docker support is coming soon: Work In Progress*
 
 #### Composer
 The first step to use Web Article Extractor is to download Composer:
