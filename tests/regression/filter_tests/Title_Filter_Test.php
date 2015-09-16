@@ -10,10 +10,13 @@
 	
 	class TitleFilterTest extends PHPUnit_Framework_TestCase  
 	{
+		// Test document instance
 		private $testDocument;
 		
+		// Expected extraction result
 		private $expectedTitle = 'GABE NEWELL DISCUSSES POSSIBILITY OF HALF-LIFE 3';
 		
+		// Test HTML page for extraction
 		private $testHTMLPage = <<<EOL
 <!DOCTYPE html>
 <html>

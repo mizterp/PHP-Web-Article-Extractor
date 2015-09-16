@@ -10,9 +10,11 @@
 	
 	class LanguageFilterTest extends PHPUnit_Framework_TestCase  
 	{
+		// Test document instance
 		private $testDocument;
 		
-private $englishTestArticle = <<<EOL
+		// Plain text article to test extraction
+		private $englishTestArticle = <<<EOL
 By Alex Osborn 
 Valve boss Gabe Newell recently shared his thoughts on the future of the Half-Life franchise, and how the company he co-founded many years ago has evolved into a service platform as it shifts away from game development.
 During an interview with Geoff Keighley in a one-off podcast called GameSlice (via Polygon), Newell was asked whether or not fans will ever see a proper Half-Life 3. Newell replied: "The only reason we'd go back and do like a super classic kind of product is if a whole bunch of people just internally at Valve said they wanted to do it and had a reasonable explanation for why [they did]." 01:24

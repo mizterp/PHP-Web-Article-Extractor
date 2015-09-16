@@ -10,8 +10,10 @@
 	
 	class KeywordFilterTest extends PHPUnit_Framework_TestCase  
 	{
+		// Test document instance
 		private $testDocument;
 
+		// Plain text article to test extraction
 		private $testArticle = <<<EOL
 By Alex Osborn 
 Valve boss Gabe Newell recently shared his thoughts on the future of the Half-Life franchise, and how the company he co-founded many years ago has evolved into a service platform as it shifts away from game development.

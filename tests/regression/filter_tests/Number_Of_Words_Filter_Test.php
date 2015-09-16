@@ -10,11 +10,40 @@
 	
 	class NumberOfWordsFilterTest extends PHPUnit_Framework_TestCase  
 	{
+		// Test document instance
 		private $testDocument;
+		
+		// Test blocks
+		private $blockOne;
+		private $blockTwo;
+		private $blockThree;
+		
+		private $successText = "This is content";
 		
 		public function setUp()
 		{
-
+			$this->testDocument = new WebArticleExtractor\TextDocument();
+			$this->testDocument->textBlocks = array();
+			
+			$this->blockOne = new WebArticleExtractor\TextBlock();
+			$this->blockOne->text = "Should be marked as Not Content";
+			$this->blockOne->numWords = 12;
+			$this->blockOne->linkDensity = 0.4;
+			$this->blockOne->isContent = false;
+			
+			$this->blockTwo = new WebArticleExtractor\TextBlock();
+			$this->blockTwo->text = $successText;
+			$this->blockTwo->numWords = 17;
+			$this->blockTwo->linkDensity = 0.2;
+			$this->blockTwo->isContent = false;
+			
+			$this->blockThree = new WebArticleExtractor\TextBlock();
+			$this->blockThree->text = "Should be marked as Not Content";
+			$this->blockThree->numWords = 5;
+			$this->blockThree->linkDensity = 1.0;
+			$this->blockThree->isContent = false;
+			
+			array_push($this->testDocument->textBlocks,$this->blockOne,$this->blockTwo,$this->blockThree);
 		}
 		
 		public function tearDown()
@@ -24,9 +53,10 @@
 	
 		public function testFilteringByNumberOfWords()
 		{
-			//WebArticleExtractor\Filters\TitleFilter::filter($this->testDocument);
-			//echo 'Got Title:'.$this->testDocument->title;
-			$this->assertEquals("", "");
+			WebArticleExtractor\Filters\NumberOfWordsFilter::filter($this->testDocument);
+			$this->assertFalse($this->blockOne->isContent);
+			$this->assertTrue($this->blockTwo->isContent);
+			$this->assertFalse($this->blockThree->isContent);
 		}
 	}
 ?>  

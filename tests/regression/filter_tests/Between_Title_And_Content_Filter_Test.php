@@ -10,6 +10,7 @@
 	
 	class BetweenTitleAndContentFilterTest extends PHPUnit_Framework_TestCase  
 	{
+		// Test document instance
 		private $testDocument;
 		
 		public function setUp()

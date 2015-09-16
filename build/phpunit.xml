@@ -8,10 +8,10 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="true"
-         bootstrap="../../autoload.php">
+         bootstrap="../../../autoload.php">
     <testsuites>
         <testsuite name="PHP Web Article Extractor test suite">
-            <directory>./tests</directory>
+            <directory>./../tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

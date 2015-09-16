@@ -10,11 +10,35 @@
 	
 	class LargestBlockFilterTest extends PHPUnit_Framework_TestCase  
 	{
+		// Test document instance
 		private $testDocument;
+		
+		// Test blocks
+		private $smallBlock;
+		private $mediumBlock;
+		private $largeBlock;
 		
 		public function setUp()
 		{
-
+			$this->testDocument = new WebArticleExtractor\TextDocument();
+			$this->testDocument->textBlocks = array();
+			
+			$this->smallBlock = new WebArticleExtractor\TextBlock();
+			$this->smallBlock->text = "Mangel greenhornism prelimitating";
+			$this->smallBlock->numWords = 3;
+			$this->smallBlock->isContent = true;
+			
+			$this->mediumBlock = new WebArticleExtractor\TextBlock();
+			$this->mediumBlock->text = "Mangel greenhornism prelimitating compassionate addicted.";
+			$this->mediumBlock->numWords = 5;
+			$this->mediumBlock->isContent = true;
+			
+			$this->largeBlock = new WebArticleExtractor\TextBlock();
+			$this->largeBlock->text = "Mangel greenhornism prelimitating compassionate addicted. Choate respicing fine indigotic nonforensically. Dysanagnosia juridical hiller subnutritious concomitance.";
+			$this->largeBlock->numWords = 15;
+			$this->largeBlock->isContent = true;
+			
+			array_push($this->testDocument->textBlocks,$this->smallBlock,$this->largeBlock,$this->mediumBlock);
 		}
 		
 		public function tearDown()
@@ -24,9 +48,19 @@
 	
 		public function testFilteringOfLargestBlock()
 		{
-			//WebArticleExtractor\Filters\TitleFilter::filter($this->testDocument);
-			//echo 'Got Title:'.$this->testDocument->title;
-			$this->assertEquals("", "");
+			WebArticleExtractor\Filters\LargestBlockFilter::filter($this->testDocument);
+			$filteredLargestBlock;
+			
+			foreach($this->testDocument->textBlocks as $block)
+			{
+				if($block->isContent)
+				{
+					$filteredLargestBlock = $block;
+					break;
+				}
+			}
+			
+			$this->assertEquals($this->largeBlock, $filteredLargestBlock);
 		}
 	}
 ?>  
