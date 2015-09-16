@@ -44,7 +44,7 @@
 			Filters\PostcontentFilter::filter($textDocument);
 			
 			// Merge close blocks
-			Mergers\CloseBlockMerger::merge($textDocument, false);
+			Mergers\CloseBlockMerger::merge($textDocument);
 			
 			// Remove blocks that are not content
 			Filters\NonContentFilter::filter($textDocument);

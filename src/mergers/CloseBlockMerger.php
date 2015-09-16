@@ -15,7 +15,7 @@
 	{
 		const BLOCK_DISTANCE = 1;
 		
-		public static function merge(&$textDocument, $onlyContent)
+		public static function merge(&$textDocument)
 		{
 			if(sizeof($textDocument->textBlocks) < 2)
 			{
@@ -23,33 +23,9 @@
 			}
 			
 			$previousBlock;
-			$offset = 0;
+			$offset = 1;
 			
-			if($onlyContent)
-			{
-				$previousBlock = NULL;
-				$offset = 0;
-				
-				foreach ($textDocument->textBlocks as $textBlock) 
-				{
-					$offset++;
-					if($textBlock->isContent)
-					{
-						$previousBlock = $textBlock;
-						break;
-					}
-				}
-				
-				if($previousBlock == NULL)
-				{
-					return;
-				}
-			}
-			else
-			{
-				$previousBlock = $textDocument->textBlocks[0];
-				$offset = 1;
-			}
+			$previousBlock = $textDocument->textBlocks[0];
 			
 			foreach ($textDocument->textBlocks as $key => $textBlock) 
 			{
@@ -63,13 +39,6 @@
 				if($blockDiff <= SELF::BLOCK_DISTANCE)
 				{
 					$validMerge = true;
-					if($onlyContent)
-					{
-						if(!$previousBlock->isContent || !$textBlock->isContent)
-						{
-							$validMerge = false;
-						}
-					}
 					
 					if($validMerge)
 					{
