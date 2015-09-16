@@ -10,7 +10,7 @@ Web Article Extractor is a PHP library that detects and extracts the primary 'ar
 * Designed to easily integrate into pipeline or microservice project architectures.
 
 ## Usage
-There are two ways to use Web Article Extractor, the first way is to use the provided docker file (See 'Installation'), this will create an instance that you can start using straight away and is ideal for pipeline architectures, the second way is to add the PHP library into your project through Composer.
+There are two ways to use Web Article Extractor, the first way is to use the provided *docker file (See 'Installation'), this will create an instance that you can start using straight away and is ideal for pipeline architectures, the second way is to add the PHP library into your project through Composer.
 
 PHP simple example:
 
@@ -30,7 +30,7 @@ echo json_encode($extractionResult);
 ```
 
 ## Installation
-#### Docker
+#### *Docker
 *Docker support is coming soon: Work In Progress*
 
 #### Composer
