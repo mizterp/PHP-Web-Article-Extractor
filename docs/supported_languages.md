@@ -1,4 +1,5 @@
-For this libraries language and keyword detection there are currently a total of 43 supported languages (files can be found in this libraries /res/stop_words/ directory):
+For this libraries language and keyword detection; there are currently a total of 43 supported languages 
+(files can be found in this libraries /res/stop_words/ directory)
 
 Language | Filename
 --- | ---
