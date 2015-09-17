@@ -13,8 +13,7 @@
 	*/
 	class Extract 
 	{
-		// Extracts article 'main' content from a given URL
-		
+
 		/**
 		*	Extracts an article directly from a URL
 		*
@@ -44,45 +43,45 @@
 			$parser = new HTMLParser();
 			
 			// Parse HTML into blocks
-			$Article = $parser->parse($rawHTMLPage);
+			$article = $parser->parse($rawHTMLPage);
 			
 			// Filter out clean article title
-			Filters\TitleFilter::filter($Article);
+			Filters\TitleFilter::filter($article);
 			
 			// Discover article 'end' points using syntactic terminators
-			Filters\EndBlockFilter::filter($Article);
+			Filters\EndBlockFilter::filter($article);
 			
 			// Filter content using word count and link density using algorithm from Machine learning
-			Filters\NumberOfWordsFilter::filter($Article);
+			Filters\NumberOfWordsFilter::filter($article);
 			
 			// Filter blocks that come after content
-			Filters\PostcontentFilter::filter($Article);
+			Filters\PostcontentFilter::filter($article);
 			
 			// Merge close blocks
-			Mergers\CloseBlockMerger::merge($Article);
+			Mergers\CloseBlockMerger::merge($article);
 			
 			// Remove blocks that are not content
-			Filters\NonContentFilter::filter($Article);
+			Filters\NonContentFilter::filter($article);
 			
 			// Mark largest block as 'content'
-			Filters\LargestBlockFilter::filter($Article);
+			Filters\LargestBlockFilter::filter($article);
 			
 			// Mark blocks found between the title and main content as content as well
-			Filters\BetweenTitleAndContentFilter::filter($Article);
+			Filters\BetweenTitleAndContentFilter::filter($article);
 			
 			// Post-extraction cleanup removing now irrelevant blocks and sets full title
-			Filters\PostExtractionFilter::filter($Article);
+			Filters\PostExtractionFilter::filter($article);
 			
 			// Scans article line by line removing non-content on a per-line basis
-			Filters\LineFilter::filter($Article);
+			Filters\LineFilter::filter($article);
 			
 			// Determine document language
-			Filters\LanguageFilter::filter($Article);
+			Filters\LanguageFilter::filter($article);
 			
 			// Filter keywords from the article document
-			Filters\KeywordFilter::filter($Article);
+			Filters\KeywordFilter::filter($article);
 			
-			return $Article; 
+			return $article; 
 		}
 	}
 ?>

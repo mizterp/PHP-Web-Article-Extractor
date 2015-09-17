@@ -8,40 +8,47 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
+	/*
+	*	Primary object returned by this library
+	*	this object is operated on and eventually contains the
+	*	'clean' data.
+	*/
 	class Article
 	{
 		/**
-		* The title of the article
+		*	The title of the article
 		*
-		* @var string
+		*	@var string
 		*/
 		public $title;
 		
 		/**
-		* The resulting article text
+		*	The article's text (Actual result article body)
 		*
-		* @var string
+		*	@var string
 		*/
 		public $text;
 		
 		/**
-		* The raw text blocks of article
+		*	The raw text blocks of article
 		*
-		* @var array
+		*	@var array
 		*/
 		public $textBlocks;
 		
 		/**
-		* The language of the article
+		*	ISO 639-1 code for the detected language of the article
+		*	example: If the detected language is english 
+		*	then this variable will contain 'en'
 		*
-		* @var string
+		*	@var string
 		*/
 		public $language;
 		
 		/**
-		* The key words of the article
+		*	The detected keywords of the article
 		*
-		* @var array
+		*	@var array
 		*/
 		public $keywords;
 	}
