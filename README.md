@@ -43,7 +43,7 @@ $ curl -s http://getcomposer.org/installer | php
 Now add PHP Web Article Extractor to your app with Composer:
 
 ```bash
-$ php composer.phar require project_full_name:stable_version
+$ php composer.phar require zackslash/php-web-article-extractor:*
 ```
 
 And that's it! Composer will automatically handle the rest.
