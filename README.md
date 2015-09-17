@@ -77,7 +77,7 @@ phpunit
 ## Acknowledgements
 
 Parts of PHP Web Article Extractor are based on algorithms from the whitepaper ['Boilerplate detection using Shallow Text Features'](http://www.l3s.de/~kohlschuetter/publications/wsdm187-kohlschuetter.pdf) 
-and 'Boilerpipe' by By Christian Kohlschuetter, Peter Fankhauser, Wolfgang Nejdl
+and 'Boilerpipe' by Christian Kohlschuetter, Peter Fankhauser, Wolfgang Nejdl
 
 PHP Web Article Extractor implements the Rapid Automatic Keyword Extraction (RAKE) algorithm as described in the book ['Text Mining: Theory and Applications'](http://www.amazon.com/Text-Mining-Applications-Michael-Berry/dp/0470749822) and the implementation was based on [aneesha's open source Python version](https://github.com/aneesha/RAKE)
 
