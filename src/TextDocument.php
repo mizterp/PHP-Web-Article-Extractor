@@ -8,12 +8,41 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
-	class TextDocument 
+	class TextDocument
 	{
-		public $title; // The title of the article
-		public $articleText; // The text of the article
-		public $textBlocks; // Raw text block of article
-		public $language; // The language of the article
-		public $keywords; // The key words of the article
+		/**
+		* The title of the article
+		*
+		* @var string
+		*/
+		public $title;
+		
+		/**
+		* The resulting article text
+		*
+		* @var string
+		*/
+		public $articleText;
+		
+		/**
+		* The raw text blocks of article
+		*
+		* @var array
+		*/
+		public $textBlocks;
+		
+		/**
+		* The language of the article
+		*
+		* @var string
+		*/
+		public $language;
+		
+		/**
+		* The key words of the article
+		*
+		* @var array
+		*/
+		public $keywords;
 	}
 ?>  

@@ -32,6 +32,9 @@
 		public $offsetBlocksStart;
 		public $offsetBlocksEnd;
 		
+		/**
+		*	Calculates the text and link densities for this block
+		*/
 		public function calculateDensities()
 		{
 			if ($this->numWordsInWrappedLines == 0)
@@ -42,7 +45,7 @@
 			$this->textDensity = $this->numWordsInWrappedLines / $this->numWrappedLines;
 			$this->linkDensity = $this->numWords == 0 ? 0 : $this->numWordsInAnchorText / $this->numWords;
 			
-			// Set full text words if this block is past the threshold
+			// Set full text words only if this block is past the threshold
 			if($this->textDensity >= self::TEXT_DENSITY_THRESHOLD)
 			{
 				$this->numFullTextWords = $this->numWords;

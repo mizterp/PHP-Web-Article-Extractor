@@ -3,14 +3,18 @@
 	 *	PHP Web Article Extractor
 	 *	A PHP library to extract the primary article content of a web page.
 	 *	
+	 *	Parts of this class are based on 'Boilerpipe' By Christian Kohlschuetter
+	 *
 	 *	@author Luke Hines
 	 *	@link https://github.com/zackslash/PHP-Web-Article-Extractor
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
+	/**
+	*	HTMLParser parses raw HTML into a TextDocument
+	*/
 	class HTMLParser
 	{
-		public $document;
 		private $textElementId = 0;
 		private $flush = false;
 		private $inIgnorableElement = 0;
@@ -32,11 +36,12 @@
 		private $textBlocks = array();
 		
 		/**
-		 *	 -Last Event-
-		 *	0 = START_TAG
-		 *	1 = END_TAG
-		 *	2 = CHARACTERS
-		 *	3 = WHITESPACE
+		 *	Holds last event while traversing
+		 *	Start tag = 0
+		 *	End tag = 1
+		 *	Characters = 2
+		 *	Whitespace = 3
+		 *	@var int
 		 */
 		private $lastEvent = -1;
 		
@@ -46,13 +51,16 @@
 		private $bodyElements;
 		private $inlineElements;
 		
-		/*
-		 * - returns enumeration -
-		 * Element can be ignored = 0
-		 * Element is a link = 1
-		 * Element is HTML body = 2
-		 * Element is inline text = 3
-		 */
+		/**
+		*	Returns the applicable action for a given HTML tag
+		*
+		*	@param  string  $url the URL to extract an article from
+		*	@return int action enumeration
+		*	0 = Element should be ignored
+		*	1 = Element should be treated as a link
+		*	2 = Element should be treated as HTML body
+		*	3 = Element should be treated as inline text
+		*/
 		function getActionForTag($tag)
 		{
 			$tag = strtoupper($tag);
@@ -84,7 +92,7 @@
 				}
 			}
 			
-			// inline elements
+			// Inline elements
 			foreach($this->inlineElements->resourceContent as $inlineElement) 
 			{
 				if ($inlineElement === $tag)
@@ -96,6 +104,12 @@
 			return -1;
 		}
 
+		/**
+		*	Begins traversal of the HTML document
+		*
+		*	@param  string  $url the raw HTML to extract an article from
+		*	@return TextDocument parsed HTML now in TextDocument form
+		*/
 		function parse($html)
 		{
 			$dom = new \DOMDocument();

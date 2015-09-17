@@ -7,10 +7,20 @@
 	 *	@link https://github.com/zackslash/PHP-Web-Article-Extractor
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
-
+	
+	/**
+	*	Extract is the package's main API providing the front extraction methods.
+	*/
 	class Extract 
 	{
 		// Extracts article 'main' content from a given URL
+		
+		/**
+		*	Extracts an article directly from a URL
+		*
+		*	@param  string  $url the URL to extract an article from
+		*	@return TextDocument extraction result
+		*/
 		public static function extractFromURL($url)
 		{
 			$html = file_get_contents($url);
@@ -23,7 +33,12 @@
 			return self::extractFromHTML($html);
 		}
 		
-		// Extracts article 'main' text from HTML
+		/**
+		*	Extracts an article from HTML
+		*
+		*	@param  string  $rawHTMLPage the raw HTML from which to extract an article
+		*	@return TextDocument extraction result
+		*/
 		public static function extractFromHTML($rawHTMLPage) 
 		{ 
 			$parser = new HTMLParser();
