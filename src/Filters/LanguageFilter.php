@@ -17,7 +17,7 @@
 	{
 		const WORD_MATCH_THRESSHOLD = 200;
 	
-		public static function filter(&$textDocument)
+		public static function filter(&$article)
 		{
 			$StopWordLanguageMap = new \WebArticleExtractor\ResourceProvider("stop_words");
 			
@@ -27,7 +27,7 @@
 			{
 				//echo json_encode($value);
 				$regex = LanguageFilter::regexForWordList($value[1],self::WORD_MATCH_THRESSHOLD);
-				$languageScore = preg_match_all($regex,$textDocument->articleText);
+				$languageScore = preg_match_all($regex,$article->text);
 				
 				// Uncomment for debug
 				//echo $value[0].'-'.$languageScore;
@@ -39,7 +39,7 @@
 					$topScore = $languageScore;
 				}
 				
-				$textDocument->language = $topLang;
+				$article->language = $topLang;
 			}
 		}
 		

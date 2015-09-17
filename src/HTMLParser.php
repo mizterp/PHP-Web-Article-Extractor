@@ -11,7 +11,7 @@
 	 */
 	
 	/**
-	*	HTMLParser parses raw HTML into a TextDocument
+	*	HTMLParser parses raw HTML into a Article
 	*/
 	class HTMLParser
 	{
@@ -108,7 +108,7 @@
 		*	Begins traversal of the HTML document
 		*
 		*	@param  string  $url the raw HTML to extract an article from
-		*	@return TextDocument parsed HTML now in TextDocument form
+		*	@return Article parsed HTML now in Article form
 		*/
 		function parse($html)
 		{
@@ -146,13 +146,13 @@
 			}
 			
 			$this->recurse($body);
-			$textDocument = new TextDocument();
+			$Article = new Article();
 			if(isset($title))
 			{
-				$textDocument->title = $title;
+				$Article->title = $title;
 			}
-			$textDocument->textBlocks = $this->textBlocks;
-			return $textDocument;
+			$Article->textBlocks = $this->textBlocks;
+			return $Article;
 		}
 
 		function recurse($node)

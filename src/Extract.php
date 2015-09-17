@@ -19,7 +19,7 @@
 		*	Extracts an article directly from a URL
 		*
 		*	@param  string  $url the URL to extract an article from
-		*	@return TextDocument extraction result
+		*	@return Article extraction result
 		*/
 		public static function extractFromURL($url)
 		{
@@ -37,52 +37,52 @@
 		*	Extracts an article from HTML
 		*
 		*	@param  string  $rawHTMLPage the raw HTML from which to extract an article
-		*	@return TextDocument extraction result
+		*	@return Article extraction result
 		*/
 		public static function extractFromHTML($rawHTMLPage) 
 		{ 
 			$parser = new HTMLParser();
 			
 			// Parse HTML into blocks
-			$textDocument = $parser->parse($rawHTMLPage);
+			$Article = $parser->parse($rawHTMLPage);
 			
 			// Filter out clean article title
-			Filters\TitleFilter::filter($textDocument);
+			Filters\TitleFilter::filter($Article);
 			
 			// Discover article 'end' points using syntactic terminators
-			Filters\EndBlockFilter::filter($textDocument);
+			Filters\EndBlockFilter::filter($Article);
 			
 			// Filter content using word count and link density using algorithm from Machine learning
-			Filters\NumberOfWordsFilter::filter($textDocument);
+			Filters\NumberOfWordsFilter::filter($Article);
 			
 			// Filter blocks that come after content
-			Filters\PostcontentFilter::filter($textDocument);
+			Filters\PostcontentFilter::filter($Article);
 			
 			// Merge close blocks
-			Mergers\CloseBlockMerger::merge($textDocument);
+			Mergers\CloseBlockMerger::merge($Article);
 			
 			// Remove blocks that are not content
-			Filters\NonContentFilter::filter($textDocument);
+			Filters\NonContentFilter::filter($Article);
 			
 			// Mark largest block as 'content'
-			Filters\LargestBlockFilter::filter($textDocument);
+			Filters\LargestBlockFilter::filter($Article);
 			
 			// Mark blocks found between the title and main content as content as well
-			Filters\BetweenTitleAndContentFilter::filter($textDocument);
+			Filters\BetweenTitleAndContentFilter::filter($Article);
 			
 			// Post-extraction cleanup removing now irrelevant blocks and sets full title
-			Filters\PostExtractionFilter::filter($textDocument);
+			Filters\PostExtractionFilter::filter($Article);
 			
 			// Scans article line by line removing non-content on a per-line basis
-			Filters\LineFilter::filter($textDocument);
+			Filters\LineFilter::filter($Article);
 			
 			// Determine document language
-			Filters\LanguageFilter::filter($textDocument);
+			Filters\LanguageFilter::filter($Article);
 			
 			// Filter keywords from the article document
-			Filters\KeywordFilter::filter($textDocument);
+			Filters\KeywordFilter::filter($Article);
 			
-			return $textDocument; 
+			return $Article; 
 		}
 	}
 ?>

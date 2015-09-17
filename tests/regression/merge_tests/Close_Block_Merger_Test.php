@@ -23,7 +23,7 @@
 		
 		public function setUp()
 		{
-			$this->testDocument = new WebArticleExtractor\TextDocument();
+			$this->testDocument = new WebArticleExtractor\Article();
 			$this->testDocument->textBlocks = array();
 			
 			$this->blockZero = new WebArticleExtractor\TextBlock();

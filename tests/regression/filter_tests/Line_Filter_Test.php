@@ -27,8 +27,8 @@ EOL;
 	
 		public function setUp()
 		{
-			$this->testDocument = new WebArticleExtractor\TextDocument();
-			$this->testDocument->articleText = $this->testArticle;
+			$this->testDocument = new WebArticleExtractor\Article();
+			$this->testDocument->text = $this->testArticle;
 		}
 		
 		public function tearDown()
@@ -39,7 +39,7 @@ EOL;
 		public function testNoncontentLineRemoval()
 		{
 			WebArticleExtractor\Filters\LineFilter::filter($this->testDocument);
-			$this->assertFalse(substr($this->testDocument->articleText, -1) == 'X');
+			$this->assertFalse(substr($this->testDocument->text, -1) == 'X');
 		}
 	}
 ?>  

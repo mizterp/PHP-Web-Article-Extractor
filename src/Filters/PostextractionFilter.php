@@ -17,39 +17,34 @@
 	
 	class PostExtractionFilter
 	{
-		public static function filter(&$textDocument)
+		public static function filter(&$article)
 		{
 			$pastTitle = false;
-			$textDocument->articleText = '';
-			foreach ($textDocument->textBlocks as $key => $textBlock) 
+			$article->text = '';
+			foreach ($article->textBlocks as $key => $textBlock) 
 			{
 				if(in_array(Labels::TITLE_LABEL,$textBlock->labels))
 				{
 					// Mark the title block as the documents 'full title'
-					$textDocument->fullTitle = $textBlock->text;
+					$article->fullTitle = $textBlock->text;
 				}
 
 				if(!$textBlock->isContent)
 				{
 					// Remove blocks that remain not marked as content
-					unset($textDocument->textBlocks[$key]);
+					unset($article->textBlocks[$key]);
 				}
 				else
 				{
-					$textDocument->articleText .= $textBlock->text;
-					$textDocument->articleText .= ' ';
+					$article->text .= $textBlock->text;
+					$article->text .= ' ';
 				}
 			}
 			
 			// Treat &nbsp as a space in all filters beyond here
-			$textDocument->articleText = htmlentities($textDocument->articleText, null, 'utf-8');
-            $textDocument->articleText = str_replace("&nbsp;", " ", $textDocument->articleText);
-			$textDocument->articleText = html_entity_decode($textDocument->articleText, null, 'utf-8');
-			
-			if(!isset($textDocument->fullTitle))
-			{
-				$textDocument->fullTitle = $textDocument->title; 
-			}
+			$article->text = htmlentities($article->text, null, 'utf-8');
+            $article->text = str_replace("&nbsp;", " ", $article->text);
+			$article->text = html_entity_decode($article->text, null, 'utf-8');
 		}
 	}
 ?>  

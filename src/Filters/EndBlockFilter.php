@@ -16,7 +16,7 @@
 	
 	class EndBlockFilter
 	{
-		public static function filter(&$textDocument)
+		public static function filter(&$article)
 		{
 			/*
 			 * Loads qualifier resources into memory on a per-extraction basis)
@@ -31,7 +31,7 @@
 			$EndBlockFollowsNumberResource = new WebArticleExtractor\ResourceProvider("end_block_lists/follows_number.lst");
 		
 			// Loop through article to find blocks that indicate the end of an article
-			foreach ($textDocument->textBlocks as $textBlock) 
+			foreach ($article->textBlocks as $textBlock) 
 			{
 				$blockNumberOfWords = $textBlock->numWords;
 				$blockTextLowerCase = trim(strtolower($textBlock->text));

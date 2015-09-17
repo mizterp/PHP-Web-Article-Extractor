@@ -14,10 +14,10 @@
 	 */
 	class LineFilter
 	{
-		public static function filter(&$textDocument)
+		public static function filter(&$article)
 		{
 			$previousLineKey;
-			$articleLines = explode("\n\r", $textDocument->articleText);
+			$articleLines = explode("\n\r", $article->text);
 			$scannedArticle = '';
 			
 			foreach($articleLines as $key => $line)
@@ -32,7 +32,7 @@
 				$scannedArticle .= $line."\n\r";
 			}
 			
-			$textDocument->articleText = $scannedArticle;
+			$article->text = $scannedArticle;
 		}
 	}
 ?>  

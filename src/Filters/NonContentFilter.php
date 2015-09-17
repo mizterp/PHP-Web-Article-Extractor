@@ -13,13 +13,13 @@
 	 */
 	class NonContentFilter
 	{
-		public static function filter(&$textDocument)
+		public static function filter(&$article)
 		{
-			foreach ($textDocument->textBlocks as $key => $textBlock) 
+			foreach ($article->textBlocks as $key => $textBlock) 
 			{
 				if(!$textBlock->isContent)
 				{
-					unset($textDocument->textBlocks[$key]);	
+					unset($article->textBlocks[$key]);	
 				}
 			}
 		}

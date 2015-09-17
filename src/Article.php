@@ -8,7 +8,7 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
-	class TextDocument
+	class Article
 	{
 		/**
 		* The title of the article
@@ -22,7 +22,7 @@
 		*
 		* @var string
 		*/
-		public $articleText;
+		public $text;
 		
 		/**
 		* The raw text blocks of article

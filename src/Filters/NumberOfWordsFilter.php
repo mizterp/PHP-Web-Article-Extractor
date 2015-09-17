@@ -18,19 +18,19 @@
 	 */
 	class NumberOfWordsFilter
 	{
-		public static function filter(&$textDocument)
+		public static function filter(&$article)
 		{
 			$prevBlock;
 			$nextBlock;
 			$count = 0;
-			foreach ($textDocument->textBlocks as $textBlock) 
+			foreach ($article->textBlocks as $textBlock) 
 			{
 				$validContent = false;
 				$currentBlock = $textBlock;
 				
-				if(sizeof($textDocument->textBlocks) > $count)
+				if(sizeof($article->textBlocks) > $count)
 				{
-					$nextBlock = $textDocument->textBlocks[$count+1];
+					$nextBlock = $article->textBlocks[$count+1];
 				}
 				else
 				{

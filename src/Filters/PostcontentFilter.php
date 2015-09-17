@@ -17,12 +17,12 @@
 	{
 		const WORD_COUNT_THRESHOLD = 60; 
 	
-		public static function filter(&$textDocument)
+		public static function filter(&$article)
 		{
 			$numberOfWords = 0;
 			$foundEndOfText = false;
 			
-			foreach ($textDocument->textBlocks as $textBlock) 
+			foreach ($article->textBlocks as $textBlock) 
 			{
 				$endBlock = in_array(Labels::END_BLOCK_LABEL, $textBlock->labels);
 

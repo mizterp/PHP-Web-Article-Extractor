@@ -12,10 +12,10 @@
 	{
 		private $possibleTitles = array();
 		
-		public static function filter(&$textDocument)
+		public static function filter(&$article)
 		{
 			//Heuristics title filter
-			$title = trim($textDocument->title);
+			$title = trim($article->title);
 			$possibleTitles[] = $title;
 			$result = '';
 			
@@ -104,12 +104,12 @@
 			//echo json_encode(array_map('strtolower', $possibleTitles));
 			
 			// Loop through article to find matching title
-			foreach ($textDocument->textBlocks as $textBlock) 
+			foreach ($article->textBlocks as $textBlock) 
 			{
 				if(in_array(strtolower($textBlock->text), array_map('strtolower', $possibleTitles)))
 				{
 					$textBlock->labels[] = \WebArticleExtractor\BlockLabels::TITLE_LABEL;
-					$textDocument->title = $textBlock->text;
+					$article->title = $textBlock->text;
 				}
 			}
 

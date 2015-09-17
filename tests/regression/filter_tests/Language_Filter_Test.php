@@ -26,7 +26,7 @@ EOL;
 		
 		public function setUp()
 		{
-			$this->testDocument = new WebArticleExtractor\TextDocument();
+			$this->testDocument = new WebArticleExtractor\Article();
 		}
 		
 		public function tearDown()
@@ -39,7 +39,7 @@ EOL;
 			$DetectionSuccess = false;
     		
 			//English
-			$this->testDocument->articleText = $this->englishTestArticle;
+			$this->testDocument->text = $this->englishTestArticle;
 			WebArticleExtractor\Filters\LanguageFilter::filter($this->testDocument);
 			$DetectionSuccess = $this->testDocument->language === "en";
 			

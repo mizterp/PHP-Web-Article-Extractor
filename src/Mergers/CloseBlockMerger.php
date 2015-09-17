@@ -15,17 +15,17 @@
 	{
 		const BLOCK_DISTANCE = 1;
 		
-		public static function merge(&$textDocument)
+		public static function merge(&$article)
 		{
-			if(sizeof($textDocument->textBlocks) < 2)
+			if(sizeof($article->textBlocks) < 2)
 			{
 				return;
 			}
 			
 			$offset = 1;
-			$previousBlock = $textDocument->textBlocks[0];
+			$previousBlock = $article->textBlocks[0];
 			
-			foreach ($textDocument->textBlocks as $key => $textBlock) 
+			foreach ($article->textBlocks as $key => $textBlock) 
 			{
 				if(!$textBlock->isContent)
 				{
@@ -50,14 +50,14 @@
 					$previousBlock->currentContainedTextElements = array_merge($previousBlock->currentContainedTextElements,$textBlock->currentContainedTextElements);
 					$previousBlock->labels = array_merge($previousBlock->labels,$textBlock->labels);
 					$previousBlock->calculateDensities();
-					unset($textDocument->textBlocks[$key]); // Safe as per PHP 'foreach' specification
+					unset($article->textBlocks[$key]); // Safe as per PHP 'foreach' specification
 				}
 				else
 				{
 					$previousBlock = $textBlock;
 				}
 			}
-			$textDocument->textBlocks = array_values($textDocument->textBlocks);
+			$article->textBlocks = array_values($article->textBlocks);
 		}
 	}
 ?>  

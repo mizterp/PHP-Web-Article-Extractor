@@ -23,7 +23,7 @@
 		
 		public function setUp()
 		{
-			$this->testDocument = new WebArticleExtractor\TextDocument();
+			$this->testDocument = new WebArticleExtractor\Article();
 			$this->testDocument->textBlocks = array();
 			
 			$this->blockZero = new WebArticleExtractor\TextBlock();
@@ -53,7 +53,7 @@
 		public function testPostextractionFilter()
 		{
 			WebArticleExtractor\Filters\PostextractionFilter::filter($this->testDocument);
-			$this->assertEquals($this->resultArticle, $this->testDocument->articleText);
+			$this->assertEquals($this->resultArticle, $this->testDocument->text);
 		}
 	}
 ?>  

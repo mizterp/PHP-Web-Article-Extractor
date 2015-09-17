@@ -21,9 +21,9 @@
 	 */
 	class LargestBlockFilter
 	{
-		public static function filter(&$textDocument)
+		public static function filter(&$article)
 		{
-			if(count($textDocument->textBlocks) < 2)
+			if(count($article->textBlocks) < 2)
 			{
 				return;
 			}
@@ -31,7 +31,7 @@
 			$largestCount = -1;
 			$largestCountKey = NULL;
 			
-			foreach ($textDocument->textBlocks as $key => $textBlock) 
+			foreach ($article->textBlocks as $key => $textBlock) 
 			{
 				if($textBlock->numWords > $largestCount)
 				{
@@ -40,7 +40,7 @@
 				}
 			}
 			
-			foreach ($textDocument->textBlocks as $key => $textBlock) 
+			foreach ($article->textBlocks as $key => $textBlock) 
 			{
 				if($key != $largestCountKey)
 				{

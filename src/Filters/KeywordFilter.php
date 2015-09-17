@@ -19,20 +19,20 @@
 		const WORD_SCORE_THRESHOLD = 3;
 		const WORD_LENGTH_THRESHOLD = 2;
 		
-		public static function filter(&$textDocument)
+		public static function filter(&$article)
 		{
 			// Can't perform this filter unless language is known
-			if(!isset($textDocument->language))
+			if(!isset($article->language))
 			{
 				return;
 			}
 			
 			// Stop words are language dependant so this filter relies on previously detected language
-			$stopWordResource = new \WebArticleExtractor\ResourceProvider("stop_words/".$textDocument->language.".lst");
-			$textDocument->keywords = array();
+			$stopWordResource = new \WebArticleExtractor\ResourceProvider("stop_words/".$article->language.".lst");
+			$article->keywords = array();
 			
 			// Append article title, its likely keywords will be in here.
-			$sentences = KeywordFilter::getSentences(str_replace('\u00a0'," ",str_replace("\r\n",'.',$textDocument->title.". ".$textDocument->articleText)));
+			$sentences = KeywordFilter::getSentences(str_replace('\u00a0'," ",str_replace("\r\n",'.',$article->title.". ".$article->text)));
 			$phrases = KeywordFilter::getPhrases($sentences, $stopWordResource);
 			$wordScores = KeywordFilter::getWordScores($phrases);
 			$candidatePhrases = KeywordFilter::getPhraseScores($phrases, $wordScores);
@@ -42,7 +42,7 @@
 			{
 				if($value > self::WORD_SCORE_THRESHOLD)
 				{
-					$textDocument->keywords[] = trim($key);
+					$article->keywords[] = trim($key);
 				}
 			}
 			

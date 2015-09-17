@@ -18,10 +18,10 @@
 	 */
 	class BetweenTitleAndContentFilter
 	{
-		public static function filter(&$textDocument)
+		public static function filter(&$article)
 		{
 			$pastTitle = false;
-			foreach ($textDocument->textBlocks as $key => $textBlock) 
+			foreach ($article->textBlocks as $key => $textBlock) 
 			{
 				if(in_array(Labels::TITLE_LABEL,$textBlock->labels))
 				{

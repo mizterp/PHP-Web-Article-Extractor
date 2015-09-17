@@ -15,7 +15,7 @@
 		
 		public function setUp()
 		{
-			$this->testDocument = new WebArticleExtractor\TextDocument();
+			$this->testDocument = new WebArticleExtractor\Article();
 			
 			// This block is not content but has the title label
 			$titleBlock = new WebArticleExtractor\TextBlock();

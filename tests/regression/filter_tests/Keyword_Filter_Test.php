@@ -29,9 +29,9 @@ EOL;
 		
 		public function setUp()
 		{
-			$this->testDocument = new WebArticleExtractor\TextDocument();
+			$this->testDocument = new WebArticleExtractor\Article();
 			$this->testDocument->language = "en";
-			$this->testDocument->articleText = $this->testArticle;
+			$this->testDocument->text = $this->testArticle;
 		}
 		
 		public function tearDown()
