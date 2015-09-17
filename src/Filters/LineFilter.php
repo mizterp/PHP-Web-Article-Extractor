@@ -24,15 +24,28 @@
 			$previousLineKey;
 			$articleLines = explode("\n\r", $article->text);
 			$scannedArticle = '';
+			$firstEntry = true;
 			
 			foreach($articleLines as $key => $line)
 			{
+				if($firstEntry)
+				{
+					$firstEntry = false;
+					// remove the 1st line if it is exactly the same as the article title
+					if(trim($line) == $article->title)
+					{
+						unset($articleLines[$key]);
+						continue;
+					}
+				}
+			
 				// remove lines containing a single character these are very unlikely to be content
 				if(strlen(trim($line)) === 1)
 				{
 					unset($articleLines[$key]);
 					continue;
 				}
+				
 				$previousLineKey = $key;
 				$scannedArticle .= $line."\n\r";
 			}
