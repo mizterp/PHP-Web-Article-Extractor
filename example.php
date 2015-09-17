@@ -8,7 +8,7 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
-	require_once 'vendor/autoload.php';
+	require_once '../../autoload.php';
 	
 	if(isset($_GET['article']))
 	{
@@ -35,7 +35,7 @@
 	}
 	else
 	{
-		echo "Specify article parameter Example: http://localhost:8888/PHP-Web-Article-Extractor/demo.php?article=http://techcrunch.com/2015/09/02/more-shots-of-frankenblackberry/";
+		echo "Specify a URL as 'article' parameter e.g.: example.php?article=http://techcrunch.com/2015/09/02/more-shots-of-frankenblackberry/";
 	}
 ?>
     
