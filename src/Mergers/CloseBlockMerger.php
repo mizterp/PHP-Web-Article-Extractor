@@ -11,10 +11,19 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
+	/*
+	*	Merges blocks in close proximity 
+	*	TODO: currently this does not take into account link densities
+	*/
 	class CloseBlockMerger
 	{
 		const BLOCK_DISTANCE = 1;
 		
+		/**
+		*	Executes this merger
+		*
+		*	@param  article  $article reference directly to the article object to merge
+		*/
 		public static function merge(&$article)
 		{
 			if(sizeof($article->textBlocks) < 2)

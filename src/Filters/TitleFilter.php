@@ -8,13 +8,20 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 
+	/**
+	*	Filters out the most likely title of the article
+	*/
 	class TitleFilter
 	{
 		private $possibleTitles = array();
-		
+
+		/**
+		*	Executes this filter
+		*
+		*	@param  article  $article reference directly to the article object to filter
+		*/
 		public static function filter(&$article)
 		{
-			//Heuristics title filter
 			$title = trim($article->title);
 			$possibleTitles[] = $title;
 			$result = '';
@@ -31,7 +38,7 @@
 				}
 			}
 			
-			$result = TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|-][ ]*/');
+			$result = TitleFilter::getLongestComponenet($title,'/[ ]*[\\|»|-][ ]*/');
 			if(strlen($result))
 			{
 				if (!in_array($result, $possibleTitles))
@@ -40,7 +47,7 @@
 				}
 			}
 			
-			$result = TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|:][ ]*/');
+			$result = TitleFilter::getLongestComponenet($title,'/[ ]*[\\|»|:][ ]*/');
 			if(strlen($result))
 			{
 				if (!in_array($result, $possibleTitles))
@@ -49,7 +56,7 @@
 				}
 			}
 			
-			$result = TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|•][ ]*/');
+			$result = TitleFilter::getLongestComponenet($title,'/[ ]*[\\|»|•][ ]*/');
 			if(strlen($result))
 			{
 				if (!in_array($result, $possibleTitles))
@@ -58,7 +65,7 @@
 				}
 			}
 			
-			$result = TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|:\\(\\)][ ]*/');
+			$result = TitleFilter::getLongestComponenet($title,'/[ ]*[\\|»|:\\(\\)][ ]*/');
 			if(strlen($result))
 			{
 				if (!in_array($result, $possibleTitles))
@@ -67,7 +74,7 @@
 				}
 			}
 			
-			$result = TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|:\\(\\)\\-][ ]*/');
+			$result = TitleFilter::getLongestComponenet($title,'/[ ]*[\\|»|:\\(\\)\\-][ ]*/');
 			if(strlen($result))
 			{
 				if (!in_array($result, $possibleTitles))
@@ -84,7 +91,7 @@
 				$multipleDelimiters = true;
 			}
 			
-			$result = urldecode(TitleFilter::GetLongestComponenet($title,'/[ ]*[\\|»|,|:\\(\\)\\-][ ]*/'));
+			$result = urldecode(TitleFilter::getLongestComponenet($title,'/[ ]*[\\|»|,|:\\(\\)\\-][ ]*/'));
 			if(strlen($result))
 			{
 				if (!in_array($result, $possibleTitles))
@@ -121,7 +128,7 @@
 			return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
 		}
 		
-		private static function GetLongestComponenet($title, $regex)
+		private static function getLongestComponenet($title, $regex)
 		{
 			$parts = preg_split($regex,$title);
 
@@ -137,7 +144,7 @@
 			for ($i = 0; $i < count($parts); $i++)
 			{
 				$p = $parts[$i];
-				if (strpos($p, '.com') !== FALSE) // TODO: Possible validation for other domains?
+				if (strpos($p, '.com') !== FALSE) // TODO: Possible inclusion of other domains
 				{
 					continue;
 				}
@@ -150,7 +157,6 @@
 					$longestPart = $p;
 				}
 			}
-			
 			return trim($longestPart);
 		}
 	}

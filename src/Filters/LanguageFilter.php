@@ -16,7 +16,12 @@
 	class LanguageFilter
 	{
 		const WORD_MATCH_THRESSHOLD = 200;
-	
+
+		/**
+		*	Executes this filter
+		*
+		*	@param  article  $article reference directly to the article object to filter
+		*/
 		public static function filter(&$article)
 		{
 			$StopWordLanguageMap = new \WebArticleExtractor\ResourceProvider("stop_words");

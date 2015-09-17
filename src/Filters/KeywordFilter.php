@@ -14,11 +14,19 @@
 	 *	@licence: PHP Web Article Extractor is made available under the MIT License.
 	 */
 	
+	/**
+	*	Filters out and identifies keywords from the article's text
+	*/
 	class KeywordFilter
 	{
 		const WORD_SCORE_THRESHOLD = 3;
 		const WORD_LENGTH_THRESHOLD = 2;
-		
+
+		/**
+		*	Executes this filter
+		*
+		*	@param  article  $article reference directly to the article object to filter
+		*/
 		public static function filter(&$article)
 		{
 			// Can't perform this filter unless language is known

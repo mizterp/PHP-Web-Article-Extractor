@@ -13,10 +13,18 @@
 	 
 	use \WebArticleExtractor\BlockLabels as Labels;
 	
+	/**
+	*	Marks all blocks after 'end' label as not content
+	*/
 	class PostcontentFilter
 	{
 		const WORD_COUNT_THRESHOLD = 60; 
-	
+
+		/**
+		*	Executes this filter
+		*
+		*	@param  article  $article reference directly to the article object to filter
+		*/
 		public static function filter(&$article)
 		{
 			$numberOfWords = 0;

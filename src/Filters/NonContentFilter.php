@@ -13,6 +13,11 @@
 	 */
 	class NonContentFilter
 	{
+		/**
+		*	Executes this filter
+		*
+		*	@param  article  $article reference directly to the article object to filter
+		*/
 		public static function filter(&$article)
 		{
 			foreach ($article->textBlocks as $key => $textBlock) 
