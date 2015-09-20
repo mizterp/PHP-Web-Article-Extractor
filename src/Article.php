@@ -51,5 +51,13 @@
 		*	@var array
 		*/
 		public $keywords;
+		
+		/**
+		*	A reference to the origional article source
+		*	For reference only; remains unmodified from origional input.
+		*
+		*	@var array
+		*/
+		public $source;
 	}
 ?>  

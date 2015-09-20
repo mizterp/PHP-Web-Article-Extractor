@@ -29,7 +29,7 @@
 				return;
 			}
 			
-			return self::extractFromHTML($html);
+			return self::extractFromHTML($html, $url);
 		}
 		
 		/**
@@ -38,8 +38,8 @@
 		*	@param  string  $rawHTMLPage the raw HTML from which to extract an article
 		*	@return Article extraction result
 		*/
-		public static function extractFromHTML($rawHTMLPage) 
-		{ 
+		public static function extractFromHTML($rawHTMLPage, $source = "") 
+		{
 			$parser = new HTMLParser();
 			
 			// Parse HTML into blocks
@@ -80,6 +80,8 @@
 			
 			// Filter keywords from the article document
 			Filters\KeywordFilter::filter($article);
+			
+			$article->source = $source;
 			
 			return $article; 
 		}
