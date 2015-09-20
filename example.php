@@ -22,8 +22,8 @@
 		// Replace newlines with breaks for demonstration
 		$articleTextForDisplay = str_replace("\r\n",'<br />',$extractionResult->text);
 		
-		echo sprintf ('<b>Extracted Title:</b><br />%s<br /><br /><b>Extracted Article content:</b><br />%s<br /><br /><b>Detected Language:</b><br />%s<br /><br /><b>Extracted Keywords:</b><br />',
-		$extractionResult->title,$articleTextForDisplay,$extractionResult->language);
+		echo sprintf('<b>Extracted Title:</b><br />%s<br /><br /><b>Extracted Article content:</b><br />%s<br /><br /><b>Detected Language:</b><br />%s<br /><br /><b>Source:</b><br />%s<br /><br /><b>Extracted Keywords:</b><br />',
+		$extractionResult->title,$articleTextForDisplay,$extractionResult->language,$extractionResult->source);
 		
 		foreach($extractionResult->keywords as $keyword)
 		{
