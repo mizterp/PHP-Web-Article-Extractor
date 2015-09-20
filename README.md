@@ -40,7 +40,7 @@ The first step to use Web Article Extractor is to download Composer:
 $ curl -s http://getcomposer.org/installer | php
 ```
 
-Now add PHP Web Article Extractor to your app with Composer:
+Now add PHP Web Article Extractor to your project with Composer:
 
 ```bash
 $ php composer.phar require zackslash/php-web-article-extractor
