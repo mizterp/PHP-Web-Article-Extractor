@@ -70,7 +70,7 @@
 			Filters\BetweenTitleAndContentFilter::filter($article);
 			
 			// Post-extraction cleanup removing now irrelevant blocks and sets full title
-			Filters\PostExtractionFilter::filter($article);
+			Filters\PostextractionFilter::filter($article);
 			
 			// Scans article line by line removing non-content on a per-line basis
 			Filters\LineFilter::filter($article);
