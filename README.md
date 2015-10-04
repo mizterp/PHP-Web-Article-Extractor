@@ -10,7 +10,7 @@ Web Article Extractor is a PHP library that detects and extracts the primary 'ar
 * Designed to easily integrate into pipeline or microservice project architectures.
 
 ## Usage
-There are two ways to use Web Article Extractor, the first way is to use the provided *docker file (See 'Installation'), this will create an instance that you can start using straight away and is ideal for pipeline architectures, the second way is to add the PHP library into your project through Composer.
+There are two ways to use Web Article Extractor, the first way is to use the provided Docker file (See 'Installation'), this will create an instance that you can start using straight away and is ideal for pipeline architectures, the second way is to add the PHP library into your project through Composer.
 
 PHP simple example:
 
@@ -30,8 +30,20 @@ echo json_encode($extractionResult);
 ```
 
 ## Installation
-#### *Docker
-*Docker support is coming soon: Work In Progress*
+#### Docker
+To build with Docker execute the build command inside this project's root directory
+```bash
+$ docker build -t zackslash/web-article-extractor .
+```
+You should now be able to run the article extractor script with the following command
+```bash
+$ docker run zackslash/web-article-extractor <URL>
+```
+
+Example:
+```bash
+$ docker run zackslash/web-article-extractor http://uk.ign.com/articles/2015/03/19/gabe-newell-discusses-possibility-of-half-life-3
+```
 
 #### Composer
 The first step to use Web Article Extractor is to download Composer:
@@ -71,7 +83,7 @@ $ php composer.phar install
 To run the unit tests, you'll need to install [PHPUnit](https://phpunit.de/), once installed, just launch the following command inside this libraries' 'build' directory:
 
 ```
-phpunit
+$ phpunit
 ```
 
 ## Acknowledgements
