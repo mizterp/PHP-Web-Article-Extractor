@@ -35,8 +35,7 @@
 
 				if(!$textBlock->isContent)
 				{
-					// Remove blocks that remain not marked as content
-					unset($article->textBlocks[$key]);
+					// Blocks marked 'possibly content' are stored.
 				}
 				else
 				{

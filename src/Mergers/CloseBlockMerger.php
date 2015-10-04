@@ -31,11 +31,16 @@
 				return;
 			}
 			
-			$offset = 1;
-			$previousBlock = $article->textBlocks[0];
+			$previousBlock = null;
 			
 			foreach ($article->textBlocks as $key => $textBlock) 
 			{
+				if(!isset($previousBlock))
+				{
+					$previousBlock = $textBlock;
+					continue;
+				}
+			
 				if(!$textBlock->isContent)
 				{
 					$previousBlock = $textBlock;
@@ -45,7 +50,7 @@
 				$blockDiff = $textBlock->offsetBlocksStart - $previousBlock->offsetBlocksEnd - 1;
 				if($blockDiff <= SELF::BLOCK_DISTANCE)
 				{
-					// Perform merger of this block into the previous block
+					// Merge of this block into the previous block
 					$previousBlock->text .= "\r\n\r\n";
 					$previousBlock->text .= $textBlock->text;
 					$previousBlock->numWords += $textBlock->numWords;
